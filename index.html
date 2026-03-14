@@ -27,7 +27,6 @@
         .font-serif-elegant { font-family: 'Cinzel', serif; }
         .font-script { font-family: 'Great Vibes', cursive; }
 
-        /* Título Bodas de Oro - Dorado y Limpio */
         .gold-title {
             background: var(--gold-metallic);
             -webkit-background-clip: text;
@@ -36,8 +35,9 @@
             display: inline-block;
             font-size: clamp(3.5rem, 12vw, 7.5rem);
             line-height: 1;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            text-transform: uppercase;
         }
 
         .primary-btn {
@@ -67,7 +67,7 @@
 
         .wedding-vintage {
             filter: sepia(0.1) contrast(1.05);
-            border: 5px solid var(--vino);
+            border: 4px solid var(--vino);
         }
 
         .countdown-box {
@@ -85,7 +85,6 @@
             line-height: 1;
         }
 
-        /* Modales Optimizados */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -144,7 +143,6 @@
             font-weight: bold;
         }
 
-        /* Control de Música Flotante */
         #music-control {
             position: fixed;
             bottom: 25px;
@@ -182,6 +180,7 @@
             <span id="music-icon" style="font-size: 24px;">🎵</span>
         </div>
     </div>
+    <!-- Archivo de audio especificado por el usuario -->
     <audio id="bg-audio" src="ytmp3free.cc_novia-mia-remastered-youtubemp3free.org.mp3" loop preload="auto"></audio>
 
     <!-- Hero Section -->
@@ -193,9 +192,11 @@
 
         <div class="relative z-10 max-w-5xl">
             <div class="reveal active">
-                <h2 class="font-serif-elegant gold-title uppercase">Bodas de Oro</h2>
+                <!-- Leyenda Bodas de Oro: Limpia y Dorada -->
+                <h2 class="font-serif-elegant gold-title">Bodas de Oro</h2>
             </div>
             
+            <!-- Nombres en Color Vino -->
             <h1 class="font-serif-elegant text-5xl md:text-8xl mb-4 vino-name font-bold tracking-tighter">Fede & Jovita</h1>
             <p class="font-script vino-name text-4xl md:text-6xl mb-12">50 años de amor y complicidad</p>
             
@@ -217,8 +218,9 @@
             <div class="w-24 h-1 bg-red-900 mx-auto mb-16 opacity-20"></div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+                <!-- Imagen de Boda Principal: WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg -->
                 <div class="photo-card wedding-vintage" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'El Día del Sí', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión. Fue el comienzo de la aventura más hermosa de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita" class="w-full h-auto">
+                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita Principal" class="w-full h-auto block" onerror="this.style.display='none'">
                     <p class="font-script vino-name text-3xl mt-4 mb-2">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[10px] py-2 uppercase tracking-widest">Toca para leer</div>
                 </div>
@@ -240,6 +242,7 @@
                     <p class="font-script vino-name text-2xl mt-4 mb-2">La melodía de nuestro amor</p>
                     <div class="bg-vino text-white text-[10px] py-2 uppercase tracking-widest">Toca para leer</div>
                 </div>
+                <!-- Otras fotos -->
                 <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'En Chapala, frente al lago, confirmamos que el secreto es caminar siempre en la misma dirección, disfrutando el paisaje de la vida.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-48 object-cover">
                 </div>
@@ -262,7 +265,7 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl rounded-lg">
                     <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Ceremonia</p>
-                    <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6">MISA DE ACCIÓN DE GRACIAS</h4>
+                    <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
                     <p class="vino-name font-bold text-4xl mb-2">15:00 HRS</p>
                     <p class="text-gray-500 text-sm mb-10 leading-loose uppercase tracking-widest font-semibold">
                         Ubicación según Coordenadas<br>Parroquia Designada
@@ -272,7 +275,7 @@
 
                 <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl rounded-lg">
                     <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Fiesta</p>
-                    <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6">SALÓN EL CORONADO</h4>
+                    <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6 uppercase">SALÓN EL CORONADO</h4>
                     <p class="vino-name font-bold text-4xl mb-2">16:00 HRS</p>
                     <p class="text-gray-500 text-sm mb-10 leading-loose uppercase tracking-widest font-semibold">
                         Av. Presidente Mario Colín<br>Industrial San Nicolás
@@ -370,17 +373,17 @@
 
         function playMusic() {
             if (!musicPlaying) {
-                audio.currentTime = 93; // Empieza en 1:33 (93 seg)
+                audio.currentTime = 21; // Inicio en el segundo 21 solicitado
                 audio.play().then(() => {
                     musicPlaying = true;
                     document.getElementById('music-icon').innerText = '🎵';
-                }).catch(e => console.log("Bloqueo de autoplay"));
+                }).catch(e => console.log("Autoplay bloqueado por navegador"));
             }
         }
 
         function toggleMusic() {
             if (audio.paused) {
-                if (audio.currentTime === 0) audio.currentTime = 93;
+                if (audio.currentTime === 0) audio.currentTime = 21;
                 audio.play();
                 document.getElementById('music-icon').innerText = '🎵';
                 musicPlaying = true;
@@ -391,10 +394,10 @@
             }
         }
 
-        // Iniciar música al primer clic del usuario
+        // Iniciar al primer clic para evitar bloqueos
         document.addEventListener('click', playMusic, { once: true });
 
-        // --- LÓGICA DE LA INVITACIÓN ---
+        // --- LÓGICA INVITACIÓN ---
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
 
         const updateCountdown = () => {
@@ -411,7 +414,7 @@
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 
             if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<p class='col-span-4 vino-name text-3xl font-bold uppercase'>¡ES HOY EL GRAN DÍA!</p>";
+                document.getElementById("countdown").innerHTML = "<p class='col-span-4 vino-name text-3xl font-bold uppercase'>¡BIENVENIDOS!</p>";
             }
         };
 
@@ -456,3 +459,4 @@
         reveal();
     </script>
 </body>
+</html>
