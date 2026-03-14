@@ -143,9 +143,47 @@
             color: var(--vino);
             font-weight: bold;
         }
+
+        /* Control de Música Flotante */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10005;
+        }
+
+        .music-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--vino);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: 2px solid white;
+            animation: pulse-music 2s infinite;
+        }
+
+        @keyframes pulse-music {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Control de Música -->
+    <div id="music-control">
+        <div class="music-toggle" onclick="toggleMusic()">
+            <span id="music-icon">🎵</span>
+        </div>
+    </div>
+    <!-- Iframe oculto de YouTube -->
+    <div id="player" style="display:none"></div>
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-white">
@@ -180,8 +218,9 @@
             <div class="w-24 h-1 bg-red-900 mx-auto mb-16 opacity-20"></div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-                <div class="photo-card wedding-vintage" onclick="openStory('WhatsApp Image 2026-03-14 at 2.35.06 PM.jpeg', 'El Día del Sí', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión. Fue el comienzo de la aventura más hermosa de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 2.35.06 PM.jpeg" alt="Boda Original" class="w-full h-auto">
+                <!-- Imagen de Boda Principal Actualizada -->
+                <div class="photo-card wedding-vintage" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'El Día del Sí', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión. Fue el comienzo de la aventura más hermosa de nuestras vidas.')">
+                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda Original" class="w-full h-auto">
                     <p class="font-script vino-name text-2xl mt-4 mb-2">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[10px] py-2 uppercase tracking-widest">Toca para leer</div>
                 </div>
@@ -219,7 +258,7 @@
         </div>
     </section>
 
-    <!-- Itinerario con Ubicación Actualizada -->
+    <!-- Itinerario -->
     <section id="itinerario" class="py-24 px-6 bg-[#fcf4f4] reveal relative">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12">
@@ -246,7 +285,7 @@
         </div>
     </section>
 
-    <!-- Contador de Tiempo -->
+    <!-- Contador -->
     <section class="py-24 bg-white text-center reveal px-4">
         <div class="max-w-5xl mx-auto">
             <p class="font-serif-elegant vino-name text-[13px] tracking-[0.8em] mb-16 uppercase font-bold">Tiempo para nuestra unión</p>
@@ -326,6 +365,59 @@
     </div>
 
     <script>
+        // --- LÓGICA DE MÚSICA (YOUTUBE API) ---
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: '56hqrlQxMMI',
+                playerVars: {
+                    'autoplay': 1,
+                    'start': 93, // Empieza en 1:33
+                    'loop': 1,
+                    'playlist': '56hqrlQxMMI',
+                    'controls': 0,
+                    'showinfo': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Intentar reproducir (bloqueado usualmente hasta interactuar)
+            event.target.playVideo();
+        }
+
+        let musicPlaying = true;
+        function toggleMusic() {
+            if (!player) return;
+            if (musicPlaying) {
+                player.pauseVideo();
+                document.getElementById('music-icon').innerText = '🔇';
+            } else {
+                player.playVideo();
+                document.getElementById('music-icon').innerText = '🎵';
+            }
+            musicPlaying = !musicPlaying;
+        }
+
+        // Activar música al primer clic del usuario para saltar bloqueo de navegadores
+        document.addEventListener('click', function() {
+            if (player && player.getPlayerState() !== 1) {
+                player.playVideo();
+            }
+        }, { once: true });
+
+        // --- LÓGICA DE LA INVITACIÓN ---
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
 
         const updateCountdown = () => {
@@ -355,6 +447,8 @@
             document.getElementById('storyContent').innerText = content;
             document.getElementById('modalStory').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            // Asegurar que la música siga si el usuario interactúa
+            if (player) player.playVideo();
         }
 
         function closeStory() {
