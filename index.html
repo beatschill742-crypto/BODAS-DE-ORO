@@ -13,6 +13,7 @@
             --vino-pale: #fcf4f4;
             --gold-metallic: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --ivory: #ffffff;
+            --cream: #fffaf0;
         }
 
         body {
@@ -21,7 +22,12 @@
             color: #1a1a1a;
             overflow-x: hidden;
             letter-spacing: 0.05em;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10z' fill='%23600000' fill-opacity='0.02'/%3E%3C/svg%3E");
+            /* Patrón de fondo más presente para quitar lo blanco */
+            background-image: 
+                radial-gradient(var(--vino-pale) 2px, transparent 2px),
+                linear-gradient(to right, var(--cream) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--cream) 1px, transparent 1px);
+            background-size: 50px 50px, 100px 100px, 100px 100px;
         }
 
         .font-serif-elegant { font-family: 'Cinzel', serif; }
@@ -51,38 +57,49 @@
             touch-action: manipulation;
         }
 
-        .primary-btn:active {
-            transform: scale(0.95);
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--vino-soft);
         }
 
         .photo-card {
-            padding: 12px;
+            padding: 15px;
             background: white;
-            border: 1px solid rgba(96, 0, 0, 0.1);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(96, 0, 0, 0.15);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0z' fill='%23600000' fill-opacity='0.01'/%3E%3C/svg%3E");
         }
 
         .wedding-vintage {
-            filter: sepia(0.1) contrast(1.05);
-            border: 4px solid var(--vino);
+            border: 6px double var(--vino);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .countdown-box {
             background: white;
             border: 3px solid var(--vino);
             padding: 1.5rem 0.5rem;
-            min-width: 80px;
+            min-width: 85px;
             box-shadow: 0 15px 30px rgba(96, 0, 0, 0.1);
         }
 
         .countdown-num {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             color: var(--vino);
             line-height: 1;
+        }
+
+        /* Elementos decorativos flotantes */
+        .deco-shape {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: 0;
         }
 
         .modal-overlay {
@@ -104,23 +121,23 @@
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            border-radius: 8px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            border: 4px solid var(--vino);
         }
 
         .close-modal-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 40px;
-            height: 40px;
+            top: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
             background: var(--vino);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
             z-index: 10001;
@@ -162,47 +179,54 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             cursor: pointer;
             border: 2px solid white;
-            animation: pulse-music 2s infinite;
         }
 
-        @keyframes pulse-music {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        /* Adornos de esquina en color vino */
+        .corner-ornament {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--vino);
+            opacity: 0.2;
         }
     </style>
 </head>
 <body>
 
-    <!-- Control de Música y Audio local -->
+    <!-- Control de Música -->
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
             <span id="music-icon" style="font-size: 24px;">🎵</span>
         </div>
     </div>
-    <!-- Archivo de audio especificado por el usuario -->
     <audio id="bg-audio" src="ytmp3free.cc_novia-mia-remastered-youtubemp3free.org.mp3" loop preload="auto"></audio>
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-white">
+        <!-- Decoraciones de fondo para llenar el blanco -->
+        <div class="absolute top-10 left-10 deco-shape">
+            <svg width="200" height="200" viewBox="0 0 100 100"><path d="M10 10 Q 50 10 50 50 T 90 90" stroke="maroon" fill="transparent" stroke-width="0.5"/></svg>
+        </div>
+        <div class="absolute bottom-10 right-10 deco-shape scale-x-[-1]">
+            <svg width="200" height="200" viewBox="0 0 100 100"><path d="M10 10 Q 50 10 50 50 T 90 90" stroke="maroon" fill="transparent" stroke-width="0.5"/></svg>
+        </div>
+
         <div class="absolute inset-0 z-0">
              <img src="WhatsApp Image 2026-03-11 at 11.36.03 AM.jpeg" alt="Fede & Jovita Palmeras" class="w-full h-full object-cover opacity-60">
         </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-white z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/40 to-white z-0"></div>
 
         <div class="relative z-10 max-w-5xl">
             <div class="reveal active">
-                <!-- Leyenda Bodas de Oro: Limpia y Dorada -->
                 <h2 class="font-serif-elegant gold-title">Bodas de Oro</h2>
             </div>
             
-            <!-- Nombres en Color Vino -->
             <h1 class="font-serif-elegant text-5xl md:text-8xl mb-4 vino-name font-bold tracking-tighter">Fede & Jovita</h1>
             <p class="font-script vino-name text-4xl md:text-6xl mb-12">50 años de amor y complicidad</p>
             
             <div class="bg-white/95 border-l-8 border-[#600000] p-6 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
-                <p class="text-[10px] uppercase tracking-[0.3em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
-                <p class="font-serif-elegant text-2xl md:text-3xl vino-name">Pancho & Carolina</p>
+                <p class="text-[10px] uppercase tracking-[0.3em] text-gray-500 mb-2 font-bold text-center">Invitados de Honor:</p>
+                <p class="font-serif-elegant text-2xl md:text-3xl vino-name text-center">Pancho & Carolina</p>
             </div>
 
             <div class="block">
@@ -212,19 +236,22 @@
     </header>
 
     <!-- Sección de Historia -->
-    <section id="historia" class="relative py-32 bg-white text-center px-6 reveal overflow-hidden">
+    <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden">
+        <!-- Relleno visual de fondo -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 40 40&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;%23600000&quot; fill-opacity=&quot;1&quot; fill-rule=&quot;evenodd&quot;%3E%3Cpath d=&quot;M0 40L40 0H20L0 20M40 40V20L20 40&quot;/%3E%3C/g%3E%3C/svg%3E');"></div>
+        
         <div class="max-w-6xl mx-auto relative z-10">
             <p class="font-script vino-name text-6xl mb-4">El Inicio de Todo</p>
             <div class="w-24 h-1 bg-red-900 mx-auto mb-16 opacity-20"></div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-                <!-- Imagen de Boda Principal: WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg -->
+                <!-- Imagen de Boda Principal corregida -->
                 <div class="photo-card wedding-vintage" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'El Día del Sí', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión. Fue el comienzo de la aventura más hermosa de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita Principal" class="w-full h-auto block" onerror="this.style.display='none'">
+                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita Principal" class="w-full h-auto block" style="min-height: 300px; object-fit: cover;">
                     <p class="font-script vino-name text-3xl mt-4 mb-2">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[10px] py-2 uppercase tracking-widest">Toca para leer</div>
                 </div>
-                <div class="text-left">
+                <div class="text-left bg-white/40 p-8 rounded-lg border border-red-900/5 backdrop-blur-sm">
                     <h3 class="font-serif-elegant text-3xl vino-name mb-6">Medio Siglo de Bendiciones</h3>
                     <p class="text-gray-600 font-light leading-relaxed text-lg italic mb-6">
                         "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
@@ -260,10 +287,11 @@
     </section>
 
     <!-- Itinerario -->
-    <section id="itinerario" class="py-24 px-6 bg-[#fcf4f4] reveal relative">
+    <section id="itinerario" class="py-24 px-6 bg-white reveal relative border-y border-red-900/5">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12">
-                <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl rounded-lg">
+                <div class="bg-red-50/30 p-12 text-center border border-red-900/10 shadow-xl rounded-lg relative overflow-hidden">
+                    <div class="absolute -top-10 -left-10 w-20 h-20 bg-red-900/5 rotate-45"></div>
                     <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Ceremonia</p>
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
                     <p class="vino-name font-bold text-4xl mb-2">15:00 HRS</p>
@@ -273,7 +301,8 @@
                     <button onclick="window.open('https://maps.google.com/?q=19.530914,-99.169121', '_blank')" class="primary-btn px-10 py-3 rounded-full text-[9px] uppercase tracking-widest">Mapa de la Iglesia</button>
                 </div>
 
-                <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl rounded-lg">
+                <div class="bg-red-50/30 p-12 text-center border border-red-900/10 shadow-xl rounded-lg relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-20 h-20 bg-red-900/5 rotate-45"></div>
                     <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Fiesta</p>
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6 uppercase">SALÓN EL CORONADO</h4>
                     <p class="vino-name font-bold text-4xl mb-2">16:00 HRS</p>
@@ -287,7 +316,7 @@
     </section>
 
     <!-- Contador -->
-    <section class="py-24 bg-white text-center reveal px-4">
+    <section class="py-24 bg-[#fffcf9] text-center reveal px-4">
         <div class="max-w-5xl mx-auto">
             <p class="font-serif-elegant vino-name text-[13px] tracking-[0.8em] mb-16 uppercase font-bold">Tiempo para nuestra unión</p>
             <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-10">
@@ -312,7 +341,7 @@
     </section>
 
     <!-- Mesa de Regalos -->
-    <section class="py-24 bg-[#fcf4f4] text-center reveal">
+    <section class="py-24 bg-white text-center reveal border-t border-red-900/5">
         <div class="max-w-2xl mx-auto px-6">
             <h3 class="font-serif-elegant text-3xl mb-4 vino-name font-bold uppercase tracking-widest">Mesa de Regalos</h3>
             <p class="text-gray-500 text-sm mb-12 italic leading-relaxed">"Su presencia es nuestro mayor regalo. No obstante, si desean tener un detalle adicional, pueden consultar nuestras mesas digitales aquí."</p>
@@ -321,7 +350,7 @@
     </section>
 
     <!-- Confirmación -->
-    <section class="py-32 bg-white text-center px-6 reveal">
+    <section class="py-32 bg-[#fffcf9] text-center px-6 reveal">
         <div class="max-w-xl mx-auto">
             <h2 class="font-serif-elegant text-4xl mb-6 vino-name font-bold uppercase">Confirmación</h2>
             <p class="text-gray-500 text-[11px] uppercase tracking-[0.4em] mb-16 font-semibold">Pancho y Carolina, esperamos contar con ustedes</p>
@@ -367,17 +396,16 @@
     </div>
 
     <script>
-        // --- LÓGICA DE AUDIO (LOCAL MP3) ---
         const audio = document.getElementById('bg-audio');
         let musicPlaying = false;
 
         function playMusic() {
             if (!musicPlaying) {
-                audio.currentTime = 21; // Inicio en el segundo 21 solicitado
+                audio.currentTime = 21; 
                 audio.play().then(() => {
                     musicPlaying = true;
                     document.getElementById('music-icon').innerText = '🎵';
-                }).catch(e => console.log("Autoplay bloqueado por navegador"));
+                }).catch(e => console.log("Interacción requerida para audio"));
             }
         }
 
@@ -394,10 +422,8 @@
             }
         }
 
-        // Iniciar al primer clic para evitar bloqueos
         document.addEventListener('click', playMusic, { once: true });
 
-        // --- LÓGICA INVITACIÓN ---
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
 
         const updateCountdown = () => {
