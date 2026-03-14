@@ -57,7 +57,6 @@
 
         .primary-btn:hover { transform: translateY(-3px); background-color: var(--vino-soft); }
 
-        /* Estilo para las tarjetas de fotos */
         .photo-card {
             padding: 15px;
             background: white;
@@ -68,17 +67,17 @@
             position: relative;
         }
 
-        /* Marco de la imagen principal */
-        .wedding-frame {
-            border: 12px double var(--vino);
+        /* Estilo de la imagen principal simplificado y elegante */
+        .wedding-main-clean {
             background: white;
-            padding: 10px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
-            max-width: 550px;
+            padding: 8px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            max-width: 500px;
             margin: 0 auto;
+            border: 1px solid rgba(96, 0, 0, 0.1);
         }
 
-        .wedding-frame img {
+        .wedding-main-clean img {
             width: 100%;
             height: auto;
             display: block;
@@ -101,7 +100,6 @@
             line-height: 1;
         }
 
-        /* Modales */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -136,7 +134,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             cursor: pointer;
             z-index: 10001;
@@ -155,17 +153,15 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4); cursor: pointer; border: 2px solid white;
         }
 
-        /* Estilos IA Dedicatoria */
-        #ai-result {
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-style: italic;
-            border: 1px dashed var(--vino);
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 8px;
+        .bg-ornament {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0C60 20 80 20 100 30C80 40 80 60 70 80C60 70 40 70 20 80C30 60 20 40 0 30C20 20 40 20 50 0Z' fill='%23600000'/%3E%3C/svg%3E");
         }
     </style>
 </head>
@@ -174,17 +170,17 @@
     <!-- Control de Música -->
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
-            <span id="music-icon" style="font-size: 26px;">🎵</span>
+            <span id="music-icon" style="font-size: 24px;">🎵</span>
         </div>
     </div>
     <audio id="bg-audio" src="ytmp3free.cc_novia-mia-remastered-youtubemp3free.org.mp3" loop preload="auto"></audio>
 
-    <!-- Portada con fondo de palmeras -->
+    <!-- Portada -->
     <header class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-white">
         <div class="absolute inset-0 z-0">
              <img src="WhatsApp Image 2026-03-11 at 11.36.03 AM.jpeg" alt="Fede & Jovita Palmeras" class="w-full h-full object-cover opacity-60">
         </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/40 to-white z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-white z-0"></div>
 
         <div class="relative z-10 max-w-5xl">
             <div class="reveal active">
@@ -195,59 +191,60 @@
             <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor y complicidad</p>
             
             <div class="bg-white/95 border-l-8 border-[#600000] p-6 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
-                <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados Especiales:</p>
+                <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
                 <p class="font-serif-elegant text-2xl md:text-4xl vino-name">Pancho & Carolina</p>
             </div>
 
             <div class="block">
-                <a href="#historia" class="primary-btn px-16 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Descubrir su Historia</a>
+                <a href="#historia" class="primary-btn px-16 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Nuestra Historia</a>
             </div>
         </div>
     </header>
 
-    <!-- Sección de Historia con Imagen de Boda Corregida -->
+    <!-- Sección de Historia: Imagen Principal Corregida -->
     <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-y border-red-900/10">
+        <div class="bg-ornament"></div>
         <div class="max-w-6xl mx-auto relative z-10">
             <p class="font-script vino-name text-7xl mb-4">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32 text-center lg:text-left">
-                <!-- Imagen de Boda Principal: WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg -->
-                <div class="photo-card wedding-frame" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'Nuestra Boda', 'Aquel día lucíamos impecables, marcando el inicio de medio siglo de bendiciones. El traje vino de Fede y el blanco eterno de Jovita.')">
-                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita">
-                    <div class="p-6 bg-white border-t border-red-900/10">
+                <!-- Imagen de Boda Principal sin recuadro pesado -->
+                <div class="wedding-main-clean cursor-pointer" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'Nuestra Boda', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión.')">
+                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita Principal">
+                    <div class="p-6 bg-white border-t border-red-900/5">
                         <p class="font-script vino-name text-4xl mb-2">Donde nuestro 'sí' comenzó</p>
-                        <div class="bg-vino text-white text-[11px] py-2 px-8 uppercase tracking-widest font-bold inline-block">Toca para leer</div>
+                        <div class="bg-vino text-white text-[11px] py-2 px-8 uppercase tracking-widest font-bold inline-block rounded-full">Toca para leer más</div>
                     </div>
                 </div>
 
-                <div class="bg-white/70 p-10 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl">
+                <div class="bg-white/60 p-10 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl">
                     <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase">Medio Siglo de Bendiciones</h3>
                     <p class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
                         "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
                     </p>
                     <p class="text-gray-600 font-light leading-loose text-lg">
-                        Desde aquel traje de terciopelo hasta las canas de hoy, cada segundo ha valido la pena. Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida.
+                        Desde aquel traje de terciopelo hasta las canas de hoy, cada segundo ha valido la pena. Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
                     </p>
                 </div>
             </div>
 
             <!-- Galería de Recuerdos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <div class="photo-card lg:col-span-2" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-[450px] object-cover object-top">
-                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic text-center">La melodía de nuestro amor</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="photo-card lg:col-span-2" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo incondicional de Jovita se convirtió en la nueva música de nuestras vidas.')">
+                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
+                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic">La melodía de nuestro amor</p>
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Chapala, testigo de un caminar siempre juntos.')">
+                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección, disfrutando el paisaje de la vida.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
+                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Cómplices', 'Medio siglo de ser el sustento del otro.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y la familia.')">
+                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis', 'Por las risas en la mesa y por la bendición de estar juntos.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos no ha cambiado.')">
+                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos', 'El brillo en nuestros ojos sigue siendo el mismo.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg" alt="Cena 2" class="w-full h-64 object-cover">
                 </div>
             </div>
@@ -348,8 +345,7 @@
     </div>
 
     <script>
-        // --- LÓGICA DE IA (GEMINI) ---
-        const apiKey = ""; // La clave se provee en el entorno de ejecución
+        const apiKey = ""; 
         
         async function generatePoem() {
             const wish = document.getElementById('guest-wish').value;
@@ -391,7 +387,6 @@
             }
         }
 
-        // --- LÓGICA DE AUDIO ---
         const audio = document.getElementById('bg-audio');
         let musicPlaying = false;
 
@@ -420,7 +415,6 @@
 
         document.addEventListener('click', playMusic, { once: true });
 
-        // --- LÓGICA INVITACIÓN ---
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
         const updateCountdown = () => {
             const now = new Date().getTime();
