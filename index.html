@@ -21,14 +21,12 @@
             color: #1a1a1a;
             overflow-x: hidden;
             letter-spacing: 0.05em;
-            /* Diseño de fondo sutil con ornamentos */
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10z' fill='%23600000' fill-opacity='0.02'/%3E%3C/svg%3E");
         }
 
         .font-serif-elegant { font-family: 'Cinzel', serif; }
         .font-script { font-family: 'Great Vibes', cursive; }
 
-        /* Título Bodas de Oro - Dorado y sin nada encima */
         .gold-title {
             background: var(--gold-metallic);
             -webkit-background-clip: text;
@@ -41,92 +39,109 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
-        /* Ornamentos Visuales */
-        .floral-bg {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 1;
-        }
-
         .primary-btn {
             background-color: var(--vino);
             color: #ffffff;
             font-weight: 700;
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             border: none;
             box-shadow: 0 10px 30px rgba(96, 0, 0, 0.2);
             cursor: pointer;
+            touch-action: manipulation;
         }
 
-        .primary-btn:hover {
-            transform: translateY(-3px);
-            background-color: var(--vino-soft);
-            box-shadow: 0 15px 45px rgba(96, 0, 0, 0.3);
+        .primary-btn:active {
+            transform: scale(0.95);
         }
 
-        /* Marcos Interactivos */
         .photo-card {
             padding: 12px;
             background: white;
             border: 1px solid rgba(96, 0, 0, 0.1);
             box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
         }
 
-        .photo-card:hover {
-            transform: scale(1.03) rotate(1deg);
-            border-color: var(--vino);
-            z-index: 10;
-        }
-
-        /* Estilo para la foto de boda antigua "a color" */
         .wedding-vintage {
             filter: sepia(0.2) saturate(1.4) contrast(1.1);
             border: 5px solid var(--vino);
         }
 
-        /* Contador Legible */
         .countdown-box {
             background: white;
             border: 3px solid var(--vino);
-            padding: 2rem 1rem;
-            min-width: 120px;
+            padding: 1.5rem 0.5rem;
+            min-width: 80px;
             box-shadow: 0 15px 30px rgba(96, 0, 0, 0.1);
         }
 
         .countdown-num {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--vino);
             line-height: 1;
         }
 
+        /* Modales Optimizados para Celular */
         .modal-overlay {
             display: none;
             position: fixed;
             z-index: 10000;
             inset: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: var(--vino);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px solid white;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .vino-name {
+            color: var(--vino);
+            font-weight: bold;
         }
     </style>
 </head>
@@ -144,12 +159,12 @@
                 <h2 class="font-serif-elegant gold-title uppercase">Bodas de Oro</h2>
             </div>
             
-            <h1 class="font-serif-elegant text-5xl md:text-8xl mb-4 vino-text font-bold tracking-tighter">Fede & Jovita</h1>
-            <p class="font-script vino-text text-4xl md:text-6xl mb-12">50 años de amor y complicidad</p>
+            <h1 class="font-serif-elegant text-5xl md:text-8xl mb-4 vino-name font-bold tracking-tighter">Fede & Jovita</h1>
+            <p class="font-script vino-name text-4xl md:text-6xl mb-12">50 años de amor y complicidad</p>
             
             <div class="bg-white/95 border-l-8 border-[#600000] p-6 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
                 <p class="text-[10px] uppercase tracking-[0.3em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
-                <p class="font-serif-elegant text-2xl md:text-3xl vino-text">Pancho & Carolina</p>
+                <p class="font-serif-elegant text-2xl md:text-3xl vino-name">Pancho & Carolina</p>
             </div>
 
             <div class="block">
@@ -158,21 +173,20 @@
         </div>
     </header>
 
-    <!-- Sección de Historia: Comienza con la Boda -->
+    <!-- Sección de Historia -->
     <section id="historia" class="relative py-32 bg-white text-center px-6 reveal overflow-hidden">
-        <!-- Arreglitos visuales de fondo -->
         <div class="max-w-6xl mx-auto relative z-10">
-            <p class="font-script vino-text text-6xl mb-4">El Inicio de Todo</p>
+            <p class="font-script vino-name text-6xl mb-4">El Inicio de Todo</p>
             <div class="w-24 h-1 bg-red-900 mx-auto mb-16 opacity-20"></div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
                 <div class="photo-card wedding-vintage" onclick="openStory('WhatsApp Image 2026-03-14 at 2.35.06 PM.jpeg', 'El Día del Sí', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión. Fue el comienzo de la aventura más hermosa de nuestras vidas.')">
                     <img src="WhatsApp Image 2026-03-14 at 2.35.06 PM.jpeg" alt="Boda Original" class="w-full h-auto">
-                    <p class="font-script vino-text text-2xl mt-4 mb-2">Donde nuestro 'sí' comenzó</p>
+                    <p class="font-script vino-name text-2xl mt-4 mb-2">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[10px] py-2 uppercase tracking-widest">Toca para leer</div>
                 </div>
                 <div class="text-left">
-                    <h3 class="font-serif-elegant text-3xl vino-text mb-6">Medio Siglo de Bendiciones</h3>
+                    <h3 class="font-serif-elegant text-3xl vino-name mb-6">Medio Siglo de Bendiciones</h3>
                     <p class="text-gray-600 font-light leading-relaxed text-lg italic mb-6">
                         "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
                     </p>
@@ -183,10 +197,10 @@
             </div>
 
             <!-- Galería de Recuerdos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                 <div class="photo-card lg:col-span-2" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra, y su música llenaba de alegría nuestro hogar. Aunque un accidente silenció las cuerdas, el apoyo incondicional de Jovita se convirtió en la nueva música de nuestras vidas. Su amor demostró que la verdadera armonía no necesita instrumentos, solo dos corazones que laten al mismo ritmo. &#34;La música se detuvo, pero nuestra canción de amor nunca terminó.&#34;')">
                     <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
-                    <p class="font-script vino-text text-2xl mt-4 mb-2">La melodía de nuestro amor</p>
+                    <p class="font-script vino-name text-2xl mt-4 mb-2">La melodía de nuestro amor</p>
                     <div class="bg-vino text-white text-[10px] py-2 uppercase tracking-widest">Toca para leer</div>
                 </div>
                 <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'En Chapala, frente al lago, confirmamos que el secreto es caminar siempre en la misma dirección, disfrutando el paisaje de la vida.')">
@@ -205,24 +219,24 @@
         </div>
     </section>
 
-    <!-- Itinerario con Horarios Actualizados -->
+    <!-- Itinerario con Ubicación Actualizada -->
     <section id="itinerario" class="py-24 px-6 bg-[#fcf4f4] reveal relative">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12">
-                <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl">
-                    <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-text mb-6 uppercase font-bold">La Ceremonia</p>
+                <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl rounded-lg">
+                    <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Ceremonia</p>
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6">MISA DE ACCIÓN DE GRACIAS</h4>
-                    <p class="vino-text font-bold text-4xl mb-2">15:00 HRS</p>
+                    <p class="vino-name font-bold text-4xl mb-2">15:00 HRS</p>
                     <p class="text-gray-500 text-sm mb-10 leading-loose uppercase tracking-widest font-semibold">
-                        Parroquia del Sagrado Corazón<br>Tlalnepantla, Edo. Méx.
+                        Ubicación según Coordenadas<br>Parroquia Designada
                     </p>
-                    <button onclick="window.open('https://www.google.com/maps/search/Parroquia+Sagrado+Corazon+Tlalnepantla', '_blank')" class="primary-btn px-10 py-3 rounded-full text-[9px] uppercase tracking-widest">Mapa de la Iglesia</button>
+                    <button onclick="window.open('https://maps.google.com/?q=19.530914,-99.169121', '_blank')" class="primary-btn px-10 py-3 rounded-full text-[9px] uppercase tracking-widest">Mapa de la Iglesia</button>
                 </div>
 
-                <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl">
-                    <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-text mb-6 uppercase font-bold">La Fiesta</p>
+                <div class="bg-white p-12 text-center border border-red-900/10 shadow-xl rounded-lg">
+                    <p class="font-serif-elegant text-[11px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Fiesta</p>
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-6">SALÓN EL CORONADO</h4>
-                    <p class="vino-text font-bold text-4xl mb-2">16:00 HRS</p>
+                    <p class="vino-name font-bold text-4xl mb-2">16:00 HRS</p>
                     <p class="text-gray-500 text-sm mb-10 leading-loose uppercase tracking-widest font-semibold">
                         Av. Presidente Mario Colín<br>Industrial San Nicolás
                     </p>
@@ -235,21 +249,21 @@
     <!-- Contador de Tiempo -->
     <section class="py-24 bg-white text-center reveal px-4">
         <div class="max-w-5xl mx-auto">
-            <p class="font-serif-elegant vino-text text-[13px] tracking-[0.8em] mb-16 uppercase font-bold">Tiempo para nuestra unión</p>
-            <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-10">
-                <div class="countdown-box flex flex-col">
+            <p class="font-serif-elegant vino-name text-[13px] tracking-[0.8em] mb-16 uppercase font-bold">Tiempo para nuestra unión</p>
+            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-10">
+                <div class="countdown-box flex flex-col items-center">
                     <span id="days" class="countdown-num">00</span>
                     <span class="text-[10px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Días</span>
                 </div>
-                <div class="countdown-box flex flex-col">
+                <div class="countdown-box flex flex-col items-center">
                     <span id="hours" class="countdown-num">00</span>
                     <span class="text-[10px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Horas</span>
                 </div>
-                <div class="countdown-box flex flex-col">
+                <div class="countdown-box flex flex-col items-center">
                     <span id="minutes" class="countdown-num">00</span>
                     <span class="text-[10px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Mins</span>
                 </div>
-                <div class="countdown-box flex flex-col">
+                <div class="countdown-box flex flex-col items-center">
                     <span id="seconds" class="countdown-num">00</span>
                     <span class="text-[10px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Segs</span>
                 </div>
@@ -260,7 +274,7 @@
     <!-- Mesa de Regalos -->
     <section class="py-24 bg-[#fcf4f4] text-center reveal">
         <div class="max-w-2xl mx-auto px-6">
-            <h3 class="font-serif-elegant text-3xl mb-4 vino-text font-bold uppercase tracking-widest">Mesa de Regalos</h3>
+            <h3 class="font-serif-elegant text-3xl mb-4 vino-name font-bold uppercase tracking-widest">Mesa de Regalos</h3>
             <p class="text-gray-500 text-sm mb-12 italic leading-relaxed">"Su presencia es nuestro mayor regalo. No obstante, si desean tener un detalle adicional, pueden consultar nuestras mesas digitales aquí."</p>
             <button onclick="toggleModal('modalRegalos', true)" class="primary-btn px-12 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.4em] shadow-xl">Ver Opciones</button>
         </div>
@@ -269,22 +283,23 @@
     <!-- Confirmación -->
     <section class="py-32 bg-white text-center px-6 reveal">
         <div class="max-w-xl mx-auto">
-            <h2 class="font-serif-elegant text-4xl mb-6 vino-text font-bold uppercase">Confirmación</h2>
+            <h2 class="font-serif-elegant text-4xl mb-6 vino-name font-bold uppercase">Confirmación</h2>
             <p class="text-gray-500 text-[11px] uppercase tracking-[0.4em] mb-16 font-semibold">Pancho y Carolina, esperamos contar con ustedes</p>
             <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-6 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.2em] w-full sm:w-auto mx-auto shadow-2xl">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 CONFIRMAR ASISTENCIA
             </button>
-            <div class="mt-24 opacity-50 text-[10px] tracking-[1em] uppercase vino-text font-bold">Vestimenta: Gala</div>
+            <div class="mt-24 opacity-50 text-[10px] tracking-[1em] uppercase vino-name font-bold">Vestimenta: Gala</div>
         </div>
-    </header>
+    </section>
 
     <!-- Modales -->
     <div id="modalStory" class="modal-overlay" onclick="closeStory()">
-        <div class="bg-white max-w-3xl w-full rounded-sm overflow-hidden shadow-2xl animate-in fade-in duration-500" onclick="event.stopPropagation()">
-            <img id="storyImg" src="" class="w-full h-[50vh] object-cover" alt="Historia">
+        <div class="modal-content animate-in fade-in duration-500" onclick="event.stopPropagation()">
+            <div class="close-modal-btn" onclick="closeStory()">&times;</div>
+            <img id="storyImg" src="" class="w-full h-64 md:h-[50vh] object-cover" alt="Historia">
             <div class="p-12 text-center">
-                <h4 id="storyTitle" class="font-serif-elegant text-3xl vino-text mb-6 uppercase font-bold"></h4>
+                <h4 id="storyTitle" class="font-serif-elegant text-3xl vino-name mb-6 uppercase font-bold"></h4>
                 <p id="storyContent" class="text-gray-600 leading-loose text-lg italic px-4"></p>
                 <button onclick="closeStory()" class="mt-12 text-[10px] uppercase tracking-widest font-bold text-red-900 border-b-2 border-red-900 pb-1">Cerrar historia</button>
             </div>
@@ -292,22 +307,21 @@
     </div>
 
     <div id="modalRegalos" class="modal-overlay" onclick="toggleModal('modalRegalos', false)">
-        <div class="bg-white max-w-md w-full m-6 rounded-sm border-t-8 border-[#600000] shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
-            <div class="p-12 text-center relative">
-                <button onclick="toggleModal('modalRegalos', false)" class="absolute top-6 right-6 text-gray-400 hover:text-red-900 text-4xl">&times;</button>
-                <h3 class="font-serif-elegant text-2xl vino-text mb-12 tracking-widest font-bold uppercase">Mesa Digital</h3>
-                <div class="space-y-6">
-                    <div class="p-8 border border-red-100 bg-red-50/20">
-                        <p class="font-bold vino-text mb-1 uppercase tracking-widest text-sm">Liverpool</p>
-                        <p class="text-xs text-gray-600 font-bold">Evento: 50921432</p>
-                    </div>
-                    <div class="p-8 border border-red-100 bg-red-50/20">
-                        <p class="font-bold vino-text mb-1 uppercase tracking-widest text-sm text-center">Transferencia</p>
-                        <p class="text-[10px] text-gray-500 mb-2 font-bold text-center">CLABE: 0123 4567 8901 2345 67</p>
-                        <p class="text-[9px] text-red-900 font-bold uppercase text-center tracking-tighter">Banco Nacional Prestige</p>
-                    </div>
+        <div class="modal-content border-t-8 border-[#600000] p-12 text-center" onclick="event.stopPropagation()">
+            <div class="close-modal-btn" onclick="toggleModal('modalRegalos', false)">&times;</div>
+            <h3 class="font-serif-elegant text-2xl vino-name mb-12 tracking-widest font-bold uppercase">Mesa Digital</h3>
+            <div class="space-y-6">
+                <div class="p-8 border border-red-100 bg-red-50/20 rounded-lg">
+                    <p class="font-bold vino-name mb-1 uppercase tracking-widest text-sm">Liverpool</p>
+                    <p class="text-xs text-gray-600 font-bold">Evento: 50921432</p>
+                </div>
+                <div class="p-8 border border-red-100 bg-red-50/20 rounded-lg">
+                    <p class="font-bold vino-name mb-1 uppercase tracking-widest text-sm text-center">Transferencia</p>
+                    <p class="text-[10px] text-gray-500 mb-2 font-bold text-center">CLABE: 0123 4567 8901 2345 67</p>
+                    <p class="text-[9px] text-red-900 font-bold uppercase text-center tracking-tighter">Banco Nacional Prestige</p>
                 </div>
             </div>
+            <button onclick="toggleModal('modalRegalos', false)" class="mt-8 text-[10px] uppercase tracking-widest font-bold text-gray-400">Cerrar Ventana</button>
         </div>
     </div>
 
@@ -328,7 +342,7 @@
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 
             if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<p class='col-span-4 vino-text text-3xl font-bold uppercase'>¡ES HOY EL GRAN DÍA!</p>";
+                document.getElementById("countdown").innerHTML = "<p class='col-span-4 vino-name text-3xl font-bold uppercase'>¡ES HOY EL GRAN DÍA!</p>";
             }
         };
 
