@@ -12,8 +12,7 @@
             --vino-soft: #800000;
             --vino-pale: #fdf2f2;
             --gold-metallic: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --ivory: #ffffff;
-            --cream: #fffaf0;
+            --ivory: #fffcf9;
         }
 
         body {
@@ -22,15 +21,16 @@
             color: #1a1a1a;
             overflow-x: hidden;
             letter-spacing: 0.05em;
-            /* Fondo con textura para eliminar el blanco */
+            /* Fondo decorativo con figuras sutiles */
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l10 30h30L55 50l10 30-25-20-25 20 10-30L0 30h30z' fill='%23600000' fill-opacity='0.03'/%3E%3C/svg%3E"),
-                linear-gradient(to bottom, var(--ivory), #f7e8e8);
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10z' fill='%23600000' fill-opacity='0.03'/%3E%3C/svg%3E"),
+                linear-gradient(to bottom, transparent, rgba(96, 0, 0, 0.05));
         }
 
         .font-serif-elegant { font-family: 'Cinzel', serif; }
         .font-script { font-family: 'Great Vibes', cursive; }
 
+        /* Título Bodas de Oro: Dorado e Imponente */
         .gold-title {
             background: var(--gold-metallic);
             -webkit-background-clip: text;
@@ -57,37 +57,36 @@
 
         .primary-btn:hover { transform: translateY(-3px); background-color: var(--vino-soft); }
 
+        /* Estilo de la imagen principal: Sin recuadros pesados */
+        .main-wedding-img {
+            width: 100%;
+            max-width: 650px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+            transition: transform 0.6s ease;
+        }
+        
+        .main-wedding-img:hover {
+            transform: scale(1.01);
+        }
+
         .photo-card {
-            padding: 15px;
+            padding: 12px;
             background: white;
             border: 1px solid rgba(96, 0, 0, 0.1);
-            box-shadow: 0 20px 50px rgba(96, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
         }
 
-        /* Estilo de la imagen principal simplificado y elegante */
-        .wedding-main-clean {
-            background: white;
-            padding: 8px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 0 auto;
-            border: 1px solid rgba(96, 0, 0, 0.1);
-        }
-
-        .wedding-main-clean img {
-            width: 100%;
-            height: auto;
-            display: block;
-            min-height: 400px;
-            object-fit: cover;
-        }
-
+        /* Contador legible */
         .countdown-box {
             background: white;
-            border: 3px solid var(--vino);
+            border: 2px solid var(--vino);
             padding: 1.5rem 0.5rem;
             min-width: 90px;
             box-shadow: 0 15px 30px rgba(96, 0, 0, 0.1);
@@ -100,6 +99,7 @@
             line-height: 1;
         }
 
+        /* Modales optimizados para celular */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -116,7 +116,7 @@
             background: white;
             max-width: 600px;
             width: 100%;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
             border: 6px solid var(--vino);
@@ -126,19 +126,20 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: var(--vino);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             z-index: 10001;
             border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
@@ -146,6 +147,7 @@
 
         .vino-name { color: var(--vino); font-weight: bold; }
 
+        /* Control de Música */
         #music-control { position: fixed; bottom: 25px; right: 25px; z-index: 10005; }
         .music-toggle {
             width: 60px; height: 60px; border-radius: 50%; background: var(--vino); color: white;
@@ -153,30 +155,26 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4); cursor: pointer; border: 2px solid white;
         }
 
-        .bg-ornament {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0C60 20 80 20 100 30C80 40 80 60 70 80C60 70 40 70 20 80C30 60 20 40 0 30C20 20 40 20 50 0Z' fill='%23600000'/%3E%3C/svg%3E");
+        /* Ornamentos decorativos */
+        .bg-pattern {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+            pointer-events: none; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='maroon'/%3E%3C/svg%3E");
         }
     </style>
 </head>
 <body>
 
-    <!-- Control de Música -->
+    <!-- Música -->
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
-            <span id="music-icon" style="font-size: 24px;">🎵</span>
+            <span id="music-icon" style="font-size: 26px;">🎵</span>
         </div>
     </div>
     <audio id="bg-audio" src="ytmp3free.cc_novia-mia-remastered-youtubemp3free.org.mp3" loop preload="auto"></audio>
 
-    <!-- Portada -->
-    <header class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-white">
+    <!-- Portada con palmeras de fondo -->
+    <header class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
         <div class="absolute inset-0 z-0">
              <img src="WhatsApp Image 2026-03-11 at 11.36.03 AM.jpeg" alt="Fede & Jovita Palmeras" class="w-full h-full object-cover opacity-60">
         </div>
@@ -188,60 +186,58 @@
             </div>
             
             <h1 class="font-serif-elegant text-6xl md:text-9xl mb-4 vino-name tracking-tighter">Fede & Jovita</h1>
-            <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor y complicidad</p>
+            <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor incondicional</p>
             
-            <div class="bg-white/95 border-l-8 border-[#600000] p-6 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
+            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
                 <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
                 <p class="font-serif-elegant text-2xl md:text-4xl vino-name">Pancho & Carolina</p>
             </div>
 
             <div class="block">
-                <a href="#historia" class="primary-btn px-16 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Nuestra Historia</a>
+                <a href="#historia" class="primary-btn px-16 py-6 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Revivir la Historia</a>
             </div>
         </div>
     </header>
 
-    <!-- Sección de Historia: Imagen Principal Corregida -->
+    <!-- Historia: Sección decorada -->
     <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-y border-red-900/10">
-        <div class="bg-ornament"></div>
+        <div class="bg-pattern"></div>
         <div class="max-w-6xl mx-auto relative z-10">
             <p class="font-script vino-name text-7xl mb-4">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32 text-center lg:text-left">
-                <!-- Imagen de Boda Principal sin recuadro pesado -->
-                <div class="wedding-main-clean cursor-pointer" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'Nuestra Boda', 'Aquel día el mundo se detuvo. Fede lucía impecable en su traje de terciopelo vino, un color que hoy, 50 años después, sigue representando la pasión y la elegancia de nuestra unión.')">
-                    <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda de Fede y Jovita Principal">
-                    <div class="p-6 bg-white border-t border-red-900/5">
-                        <p class="font-script vino-name text-4xl mb-2">Donde nuestro 'sí' comenzó</p>
-                        <div class="bg-vino text-white text-[11px] py-2 px-8 uppercase tracking-widest font-bold inline-block rounded-full">Toca para leer más</div>
-                    </div>
-                </div>
-
-                <div class="bg-white/60 p-10 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl">
-                    <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase">Medio Siglo de Bendiciones</h3>
-                    <p class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
-                        "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
-                    </p>
-                    <p class="text-gray-600 font-light leading-loose text-lg">
-                        Desde aquel traje de terciopelo hasta las canas de hoy, cada segundo ha valido la pena. Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
-                    </p>
+            <!-- Imagen Principal: Sin recuadros, natural y bonita -->
+            <div class="mb-24 cursor-pointer" onclick="openStory('WhatsApp Image 2026-03-14 at 2.35.06 PM (1).jpeg', 'Nuestra Boda', 'El comienzo de una vida compartida. Rodeados de familia y sueños, aquel día el traje vino de Fede y el blanco de Jovita sellaron una promesa que ha florecido por 50 años.')">
+                <img src="WhatsApp Image 2026-03-14 at 2.35.06 PM (1).jpeg" alt="Boda Fede y Jovita Principal" class="main-wedding-img">
+                <div class="mt-8">
+                    <p class="font-script vino-name text-5xl mb-4 italic">Donde nuestro 'sí' comenzó</p>
+                    <div class="bg-vino text-white text-[11px] py-3 px-12 uppercase tracking-widest font-bold inline-block rounded-full shadow-lg">Leer historia completa</div>
                 </div>
             </div>
 
-            <!-- Galería de Recuerdos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-                <div class="photo-card lg:col-span-2" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo incondicional de Jovita se convirtió en la nueva música de nuestras vidas.')">
+            <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24">
+                <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase text-center md:text-left">Medio Siglo de Bendiciones</h3>
+                <p class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
+                    "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
+                </p>
+                <p class="text-gray-600 font-light leading-loose text-lg">
+                    Desde aquel día hasta las canas de hoy, cada segundo ha valido la pena. Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
+                </p>
+            </div>
+
+            <!-- Galería -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                <div class="photo-card lg:col-span-2" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
                     <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
-                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic">La melodía de nuestro amor</p>
+                    <p class="font-script vino-name text-3xl mt-4 italic">La melodía de nuestro amor</p>
                 </div>
                 <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección, disfrutando el paisaje de la vida.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Cómplices', 'Medio siglo de ser el sustento del otro.')">
+                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis', 'Por las risas en la mesa y por la bendición de estar juntos.')">
+                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 object-cover">
                 </div>
                 <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos', 'El brillo en nuestros ojos sigue siendo el mismo.')">
@@ -251,25 +247,23 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN IA: Dedicatoria Poética ✨ -->
+    <!-- Dedicatoria IA ✨ -->
     <section id="ia-dedicatoria" class="py-24 px-6 bg-white reveal">
         <div class="max-w-3xl mx-auto text-center">
-            <h3 class="font-serif-elegant text-3xl vino-name font-bold uppercase mb-6 tracking-widest">Dedicatoria Poética de Oro ✨</h3>
-            <p class="text-gray-500 mb-8 italic">Escribe un deseo para Fede y Jovita y nuestra IA lo transformará en una postal de gala.</p>
+            <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Dedicatoria Poética ✨</h3>
+            <p class="text-gray-500 mb-10 italic">Escriban un deseo para Fede y Jovita y nuestra IA lo transformará en una postal de gala.</p>
             
-            <div class="bg-[#fcf4f4] p-8 rounded-xl border border-red-900/10 shadow-lg">
-                <textarea id="guest-wish" class="w-full p-4 border border-red-900/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900 mb-4 h-32" placeholder="Ej: Que sigan siempre así de felices y unidos..."></textarea>
-                <button id="ai-button" onclick="generatePoem()" class="primary-btn px-12 py-4 rounded-full text-[11px] uppercase tracking-widest font-bold">Transformar mi deseo ✨</button>
+            <div class="bg-[#fcf4f4] p-10 rounded-xl border border-red-900/10 shadow-2xl relative">
+                <textarea id="guest-wish" class="w-full p-6 border border-red-900/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900 mb-6 h-32 text-lg shadow-inner" placeholder="Ej: Que sigan siempre así de felices..."></textarea>
+                <button id="ai-button" onclick="generatePoem()" class="primary-btn px-16 py-5 rounded-full text-[11px] uppercase tracking-widest font-bold">Transformar mi deseo ✨</button>
                 
-                <div id="ai-loading" class="hidden mt-8">
-                    <div class="animate-pulse vino-text font-serif italic text-lg">Escribiendo versos de oro...</div>
+                <div id="ai-loading" class="hidden mt-10">
+                    <div class="animate-pulse vino-text font-serif italic text-2xl">Escribiendo versos de oro...</div>
                 </div>
                 
-                <div id="ai-result-container" class="hidden mt-8 animate-in fade-in zoom-in duration-500">
-                    <div id="ai-result" class="font-script text-3xl vino-name text-center border-2 border-double border-red-900/30 p-8 bg-white/80">
-                        <!-- Resultado IA -->
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-4 uppercase">Mensaje embellecido por IA ✨</p>
+                <div id="ai-result-container" class="hidden mt-10 animate-in fade-in zoom-in duration-700">
+                    <div id="ai-result" class="font-script text-4xl vino-name text-center border-2 border-double border-red-900/30 p-10 bg-white/80 leading-relaxed shadow-lg"></div>
+                    <p class="text-[10px] text-gray-400 mt-6 uppercase tracking-[0.2em]">Mensaje embellecido por Inteligencia Artificial ✨</p>
                 </div>
             </div>
         </div>
@@ -282,14 +276,14 @@
                 <div class="bg-white p-12 border-t-8 border-vino shadow-2xl rounded-sm">
                     <p class="font-serif-elegant text-[12px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Ceremonia</p>
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
-                    <p class="vino-name font-bold text-5xl mb-4">15:00 HRS</p>
-                    <button onclick="window.open('https://maps.google.com/?q=19.530914,-99.169121', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Abrir Ubicación</button>
+                    <p class="vino-name font-bold text-5xl mb-6">15:00 HRS</p>
+                    <button onclick="window.open('https://maps.google.com/?q=19.530914,-99.169121', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Abrir en Google Maps</button>
                 </div>
                 <div class="bg-white p-12 border-t-8 border-vino shadow-2xl rounded-sm">
                     <p class="font-serif-elegant text-[12px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Fiesta</p>
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">SALÓN EL CORONADO</h4>
-                    <p class="vino-name font-bold text-5xl mb-4">16:00 HRS</p>
-                    <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Cómo Llegar</button>
+                    <p class="vino-name font-bold text-5xl mb-6">16:00 HRS</p>
+                    <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Ver cómo llegar</button>
                 </div>
             </div>
         </div>
@@ -298,7 +292,7 @@
     <!-- Contador -->
     <section class="py-24 bg-white text-center reveal px-4">
         <div class="max-w-5xl mx-auto">
-            <p class="font-serif-elegant vino-name text-[14px] tracking-[0.8em] mb-16 uppercase font-bold">Cuenta regresiva para el encuentro</p>
+            <p class="font-serif-elegant vino-name text-[16px] tracking-[1em] mb-16 uppercase font-bold">La cuenta regresiva</p>
             <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-12">
                 <div class="countdown-box flex flex-col items-center">
                     <span id="days" class="countdown-num">00</span>
@@ -324,27 +318,30 @@
     <section class="py-32 bg-[#fdf2f2] text-center px-6 reveal">
         <div class="max-w-xl mx-auto">
             <h2 class="font-serif-elegant text-5xl mb-8 vino-name font-bold uppercase">Confirmación</h2>
-            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-7 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] w-full sm:w-auto mx-auto shadow-2xl">
-                ABRIR FORMULARIO DE ASISTENCIA
+            <p class="text-gray-600 text-lg mb-16 italic">Pancho y Carolina, su alegría es el mejor regalo.</p>
+            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] w-full sm:w-auto mx-auto shadow-2xl">
+                CONFIRMAR ASISTENCIA
             </button>
-            <div class="mt-24 opacity-60 text-[12px] tracking-[1.2em] uppercase vino-name font-bold">Vestimenta: Gala</div>
+            <div class="mt-24 opacity-60 text-[12px] tracking-[1.5em] uppercase vino-name font-bold">Vestimenta: Gala</div>
         </div>
     </section>
 
-    <!-- Modal de Historia -->
+    <!-- Modal de Historias -->
     <div id="modalStory" class="modal-overlay" onclick="closeStory()">
         <div class="modal-content animate-in fade-in duration-500" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeStory()">&times;</div>
             <img id="storyImg" src="" class="w-full h-72 md:h-[55vh] object-cover" alt="Historia">
             <div class="p-12 text-center">
                 <h4 id="storyTitle" class="font-serif-elegant text-4xl vino-name mb-8 uppercase font-bold"></h4>
-                <p id="storyContent" class="text-gray-700 leading-loose text-xl italic px-4"></p>
-                <button onclick="closeStory()" class="mt-14 text-[11px] uppercase tracking-widest font-bold text-red-900 border-b-2 border-red-900 pb-2">Cerrar</button>
+                <div class="w-20 h-1 bg-red-900 mx-auto mb-8 opacity-20"></div>
+                <p id="storyContent" class="text-gray-700 leading-loose text-2xl italic px-4"></p>
+                <button onclick="closeStory()" class="mt-14 text-[12px] uppercase tracking-widest font-bold text-red-900 border-b-2 border-red-900 pb-2">Cerrar</button>
             </div>
         </div>
     </div>
 
     <script>
+        // --- LÓGICA DE IA (GEMINI) ---
         const apiKey = ""; 
         
         async function generatePoem() {
@@ -360,33 +357,45 @@
             loading.classList.remove('hidden');
             resultCont.classList.add('hidden');
 
-            const systemPrompt = "Eres un poeta experto en bodas de oro. Tu tarea es recibir un mensaje de un invitado para Fede y Jovita y transformarlo en una dedicatoria elegante, breve y conmovedora (máximo 4 versos) en español. Usa un tono de gala.";
-            const userQuery = `Transforma este mensaje: "${wish}"`;
+            const systemPrompt = "Eres un poeta experto en bodas de oro. Tu tarea es recibir un deseo de un invitado y transformarlo en una dedicatoria muy elegante, breve (máximo 4 versos) y conmovedora en español. Usa un tono de gala.";
+            const userQuery = `Deseo del invitado: "${wish}"`;
 
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userQuery }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
+            let retries = 0;
+            const callAPI = async () => {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: userQuery }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    });
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (e) {
+                    if (retries < 5) {
+                        retries++;
+                        await new Promise(r => setTimeout(r, Math.pow(2, retries) * 1000));
+                        return callAPI();
+                    }
+                    throw e;
+                }
+            };
 
-                const data = await response.json();
-                const poem = data.candidates?.[0]?.content?.parts?.[0]?.text || "El amor brilló en cada palabra.";
-                
-                resultText.innerText = poem;
+            callAPI().then(poem => {
+                resultText.innerText = poem || "Que el amor brille siempre en su camino.";
                 resultCont.classList.remove('hidden');
-            } catch (error) {
-                resultText.innerText = "Que el amor siga guiando su camino como hace 50 años.";
+            }).catch(() => {
+                resultText.innerText = "Cincuenta años de amor y luz, guiados siempre por su fe y unión.";
                 resultCont.classList.remove('hidden');
-            } finally {
+            }).finally(() => {
                 button.disabled = false;
                 loading.classList.add('hidden');
-            }
+            });
         }
 
+        // --- MÚSICA ---
         const audio = document.getElementById('bg-audio');
         let musicPlaying = false;
 
@@ -396,7 +405,7 @@
                 audio.play().then(() => {
                     musicPlaying = true;
                     document.getElementById('music-icon').innerText = '🎵';
-                }).catch(e => console.log("Interacción requerida"));
+                }).catch(() => {});
             }
         }
 
@@ -415,6 +424,7 @@
 
         document.addEventListener('click', playMusic, { once: true });
 
+        // --- INVITACIÓN ---
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
         const updateCountdown = () => {
             const now = new Date().getTime();
@@ -423,10 +433,12 @@
             const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("days").innerText = d.toString().padStart(2, '0');
-            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+            if (document.getElementById("days")) {
+                document.getElementById("days").innerText = d.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+            }
         };
         setInterval(updateCountdown, 1000);
         updateCountdown();
