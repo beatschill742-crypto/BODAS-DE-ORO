@@ -64,7 +64,6 @@
             margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 20px 45px rgba(0,0,0,0.15);
-            transition: transform 0.6s ease;
         }
 
         .photo-card {
@@ -79,7 +78,7 @@
 
         .countdown-box {
             background: white;
-            border: 2px solid var(--vino);
+            border: 3px solid var(--vino);
             padding: 1.5rem 0.5rem;
             min-width: 90px;
             box-shadow: 0 15px 30px rgba(96, 0, 0, 0.1);
@@ -97,7 +96,7 @@
             position: fixed;
             z-index: 10000;
             inset: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
@@ -134,8 +133,16 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .vino-name { color: var(--vino); font-weight: bold; }
 
@@ -155,7 +162,7 @@
 </head>
 <body>
 
-    <!-- Música -->
+    <!-- Control de Música -->
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
             <span id="music-icon" style="font-size: 26px;">🎵</span>
@@ -196,15 +203,16 @@
             <p class="font-script vino-name text-7xl mb-4">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
-            <div class="mb-24 cursor-pointer" onclick="openStory('WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg', 'Nuestra Boda', 'El comienzo de una vida compartida. Aquel día, nuestros sueños se unieron en una promesa que ha florecido por 50 años. El traje vino y el blanco eterno marcaron el primer compás de nuestra melodía.')">
-                <img src="WhatsApp Image 2026-03-14 at 3.11.27 PM.jpg" alt="Boda Fede y Jovita Principal" class="main-wedding-img">
+            <!-- Imagen Principal -->
+            <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'El comienzo de una vida compartida. Aquel día, nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
+                <img src="Captura de pantalla 2026-03-15 172233.png" alt="Boda Fede y Jovita Principal" class="main-wedding-img">
                 <div class="mt-8">
                     <p class="font-script vino-name text-5xl mb-4 italic">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[11px] py-3 px-12 uppercase tracking-widest font-bold inline-block rounded-full shadow-lg">Leer historia completa</div>
                 </div>
             </div>
 
-            <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24">
+            <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24 reveal">
                 <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase text-center md:text-left">Medio Siglo de Bendiciones</h3>
                 <p class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
                     "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
@@ -216,32 +224,31 @@
 
             <!-- Galería -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
-                <div class="photo-card lg:col-span-2" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
+                <div class="photo-card lg:col-span-2 reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
                     <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
-                    <p class="font-script vino-name text-3xl mt-4 italic">La melodía de nuestro amor</p>
+                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic">La melodía de nuestro amor</p>
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 object-cover">
                 </div>
-                <div class="photo-card" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos sigue siendo el mismo.')">
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos sigue siendo el mismo.')">
                     <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg" alt="Cena 2" class="w-full h-64 object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Dedicatoria IA ✨ -->
+    <!-- IA Dedicatoria -->
     <section id="ia-dedicatoria" class="py-24 px-6 bg-white reveal">
         <div class="max-w-3xl mx-auto text-center">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Dedicatoria Poética ✨</h3>
             <p class="text-gray-500 mb-10 italic">Escriban un deseo para Fede y Jovita y nuestra IA lo transformará en una postal de gala.</p>
-            
             <div class="bg-[#fcf4f4] p-10 rounded-xl border border-red-900/10 shadow-2xl">
                 <textarea id="guest-wish" class="w-full p-6 border border-red-900/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900 mb-6 h-32 text-lg" placeholder="Ej: Que sigan siempre así de felices..."></textarea>
                 <button id="ai-button" onclick="generatePoem()" class="primary-btn px-16 py-5 rounded-full text-[11px] uppercase tracking-widest font-bold">Transformar mi deseo ✨</button>
@@ -253,7 +260,7 @@
         </div>
     </section>
 
-    <!-- Regalos con Efecto Confeti 🎊 -->
+    <!-- Mesa de Regalos -->
     <section id="regalos" class="py-24 px-6 bg-[#fffcf9] text-center reveal border-y border-red-900/5">
         <div class="max-w-2xl mx-auto">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Mesa de Regalos</h3>
@@ -336,11 +343,11 @@
             <div class="close-modal-btn" onclick="closeRegalos()">&times;</div>
             <h3 class="font-serif-elegant text-4xl vino-name mb-12 tracking-widest font-bold uppercase">Nuestra Mesa Digital</h3>
             <div class="space-y-8">
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm">
+                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm text-center">
                     <p class="font-bold vino-name mb-2 uppercase tracking-widest text-lg">Liverpool</p>
                     <p class="text-2xl text-gray-700 font-bold">Evento: 50921432</p>
                 </div>
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm">
+                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm text-center">
                     <p class="font-bold vino-name mb-2 uppercase tracking-widest text-lg">Transferencia</p>
                     <p class="text-sm text-gray-600 mb-2">CLABE: 0123 4567 8901 2345 67</p>
                     <p class="text-[11px] text-red-900 font-bold uppercase text-center tracking-tighter">Banco Nacional Prestige</p>
@@ -353,61 +360,42 @@
     <script>
         const apiKey = ""; 
 
-        // Confeti de bienvenida por 3 segundos ✨
+        // Confeti de bienvenida ✨
         function openConfetti(duration) {
             var end = Date.now() + duration;
             var colors = ['#bf953f', '#fcf6ba', '#b38728'];
-
             (function frame() {
-                confetti({
-                    particleCount: 2,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 2,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
 
         window.onload = function() {
-            openConfetti(3000); // 3 segundos de confeti al abrir
+            openConfetti(3000); 
         }
 
-        // Confeti para botón de regalos
-        function triggerGoldConfetti() {
-            var count = 200;
-            var defaults = { origin: { y: 0.7 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] };
-            function fire(particleRatio, opts) {
-                confetti(Object.assign({}, defaults, opts, {
-                    particleCount: Math.floor(count * particleRatio)
-                }));
-            }
-            fire(0.25, { spread: 26, startVelocity: 55 });
-            fire(0.2, { spread: 60 });
-            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-            fire(0.1, { spread: 120, startVelocity: 45 });
-        }
+        // Lógica de aparición on scroll (REPARADA con IntersectionObserver)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Funciones Regalos
         function openRegalos() {
             document.getElementById('modalRegalos').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            triggerGoldConfetti();
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
         }
-
         function closeRegalos() { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
+        // IA Gemini
         async function generatePoem() {
             const wish = document.getElementById('guest-wish').value;
             if (!wish) return;
@@ -434,20 +422,24 @@
             } finally { button.disabled = false; loading.classList.add('hidden'); }
         }
 
+        // Música
         const audio = document.getElementById('bg-audio');
         let musicPlaying = false;
         function playMusic() { if (!musicPlaying) { audio.currentTime = 21; audio.play().then(() => { musicPlaying = true; document.getElementById('music-icon').innerText = '🎵'; }).catch(() => {}); } }
         function toggleMusic() { if (audio.paused) { if (audio.currentTime === 0) audio.currentTime = 21; audio.play(); document.getElementById('music-icon').innerText = '🎵'; musicPlaying = true; } else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; musicPlaying = false; } }
         document.addEventListener('click', playMusic, { once: true });
 
+        // Contador
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const distance = eventDate - now;
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            if (document.getElementById("days")) {
+                document.getElementById("days").innerText = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000)).toString().padStart(2, '0');
+            }
         }, 1000);
 
         function openStory(img, title, content) {
@@ -459,9 +451,6 @@
             if (audio.paused && !musicPlaying) playMusic();
         }
         function closeStory() { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-        const reveal = () => { document.querySelectorAll(".reveal").forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active"); }); };
-        window.addEventListener("scroll", reveal); reveal();
     </script>
 </body>
 </html>
