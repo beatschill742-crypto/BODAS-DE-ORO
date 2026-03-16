@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
     
-    <!-- Etiquetas Meta para Miniatura en el Link (WhatsApp/Redes Sociales) -->
+    <!-- Etiquetas Meta para Miniatura en el Link -->
     <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
     <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio.">
     <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
-    <meta property="og:url" content="https://fede-y-jovita.github.io">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="Captura de pantalla 2026-03-15 172233.png">
@@ -209,7 +208,8 @@
             
             <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal shadow-2xl mb-12">
                 <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
-                <p class="font-serif-elegant text-2xl md:text-4xl vino-name">Pancho & Carolina</p>
+                <!-- NOMBRE DINÁMICO 1 -->
+                <p id="guest-name-header" class="font-serif-elegant text-2xl md:text-4xl vino-name">Invitado especial</p>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -235,8 +235,9 @@
 
             <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24 reveal">
                 <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase text-center md:text-left">Medio Siglo de Bendiciones</h3>
-                <p class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
-                    "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
+                <!-- NOMBRE DINÁMICO 2 -->
+                <p id="guest-text-story" class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
+                    Querido invitado, queremos compartir contigo los momentos que forjaron este camino de amor.
                 </p>
                 <p class="text-gray-600 font-light leading-loose text-lg text-center md:text-left">
                     Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
@@ -294,11 +295,14 @@
         </div>
     </section>
 
-    <!-- Confirmación y Botón de Boletos Final -->
+    <!-- Confirmación -->
     <section class="py-32 bg-white text-center px-6 reveal">
         <div class="max-w-xl mx-auto">
             <h2 class="font-serif-elegant text-5xl mb-8 vino-name font-bold uppercase text-center">Asistencia</h2>
             <div class="flex flex-col gap-6 items-center">
+                <!-- NOMBRE DINÁMICO 3 -->
+                <p id="guest-name-confirm" class="text-gray-600 text-lg mb-4 italic text-center">¡Te esperamos!</p>
+                
                 <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] shadow-2xl w-full max-w-sm">
                     CONFIRMAR ASISTENCIA
                 </button>
@@ -329,19 +333,21 @@
                 
                 <div class="py-6">
                     <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center">Pase exclusivo para:</p>
-                    <p class="font-serif-elegant text-2xl vino-name mb-4 text-center">Pancho & Carolina</p>
+                    <!-- NOMBRE DINÁMICO 4 -->
+                    <p id="guest-name-ticket" class="font-serif-elegant text-2xl vino-name mb-4 text-center">Invitado especial</p>
                     <div class="inline-block bg-red-900 text-white px-6 py-2 rounded-full font-bold text-xs tracking-widest">
-                        ADMITE: 2 PERSONAS
+                        ADMITE: ACCESO FAMILIAR
                     </div>
                 </div>
 
                 <div class="ticket-divider"></div>
                 
                 <div class="flex flex-col items-center gap-4 py-4">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Pase para Pancho %26 Carolina - Bodas de Oro Fede %26 Jovita" 
+                    <!-- QR DINÁMICO -->
+                    <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Pase de Acceso - Bodas de Oro Fede y Jovita" 
                          alt="QR Personalizado" 
                          class="border-8 border-white shadow-xl w-40 h-40">
-                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Código de Seguridad Único</p>
+                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Válido para entrada al salón</p>
                 </div>
             </div>
             
@@ -374,9 +380,45 @@
     </div>
 
     <script>
+        // --- FUNCIÓN DE PERSONALIZACIÓN POR URL ---
+        function personalizarInvitacion() {
+            // 1. Obtener parámetros de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let nombreInvitado = urlParams.get('nombre');
+
+            // 2. Si no hay nombre, usar el default
+            if (!nombreInvitado || nombreInvitado.trim() === "") {
+                nombreInvitado = "Invitado Especial";
+            }
+
+            // 3. Limpiar el nombre (quitar símbolos extraños si los hay)
+            nombreInvitado = decodeURIComponent(nombreInvitado);
+
+            // 4. Insertar en los diferentes lugares de la página
+            const elHeader = document.getElementById('guest-name-header');
+            const elTicket = document.getElementById('guest-name-ticket');
+            const elConfirm = document.getElementById('guest-name-confirm');
+            const elStory = document.getElementById('guest-text-story');
+            const elQR = document.getElementById('qr-code-img');
+
+            if (elHeader) elHeader.innerText = nombreInvitado;
+            if (elTicket) elTicket.innerText = nombreInvitado;
+            if (elConfirm) elConfirm.innerText = `${nombreInvitado}, su alegría es el mejor regalo.`;
+            if (elStory) elStory.innerText = `${nombreInvitado}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
+            
+            // 5. Actualizar QR con el nombre
+            if (elQR) {
+                const qrData = encodeURIComponent(`Pase para ${nombreInvitado} - Bodas de Oro Fede y Jovita`);
+                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
+            }
+        }
+
         // Inicialización segura para todos los navegadores
         document.addEventListener('DOMContentLoaded', function() {
-            // Confeti de bienvenida por 3 segundos ✨
+            // Ejecutar personalización
+            personalizarInvitacion();
+
+            // Confeti de bienvenida ✨
             var end = Date.now() + 3000;
             var colors = ['#bf953f', '#fcf6ba', '#b38728'];
             (function frame() {
@@ -387,7 +429,7 @@
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
 
-            // Intersection Observer para animaciones (Compatible con navegadores modernos)
+            // Intersection Observer para animaciones
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -401,7 +443,6 @@
                     if (el instanceof Element) observer.observe(el);
                 });
             } else {
-                // Fallback para navegadores antiguos
                 document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
             }
         });
@@ -438,7 +479,7 @@
                 audioIniciado = true;
             }
             audio.play().catch(function(error) {
-                console.log("El navegador bloqueó el inicio automático del audio.");
+                console.log("Audio bloqueado");
             });
         }
 
@@ -452,7 +493,6 @@
             } 
         }
 
-        // Activar música al primer toque del usuario (Requisito de navegadores móviles)
         document.addEventListener('touchstart', function() { if (audio.paused && !audioIniciado) playMusic(); }, { once: true });
         document.addEventListener('click', function() { if (audio.paused && !audioIniciado) playMusic(); }, { once: true });
     </script>
