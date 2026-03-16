@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
+    
+    <!-- Etiquetas Meta para Miniatura en el Link (Redes Sociales/WhatsApp) -->
+    <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
+    <meta property="og:description" content="Acompáñanos a celebrar 50 años de amor incondicional.">
+    <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="Captura de pantalla 2026-03-15 172233.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -64,6 +73,37 @@
             margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+
+        /* Estilo de Boleto Digital */
+        .ticket {
+            position: relative;
+            background: white;
+            padding: 2rem;
+            border: 2px solid var(--vino);
+            max-width: 400px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .ticket::before, .ticket::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            background: var(--ivory);
+            border: 2px solid var(--vino);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket::before { left: -17px; }
+        .ticket::after { right: -17px; }
+
+        .ticket-divider {
+            border-top: 2px dashed var(--vino);
+            margin: 1.5rem 0;
+            opacity: 0.3;
         }
 
         .photo-card {
@@ -178,23 +218,61 @@
         <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-white z-0"></div>
 
         <div class="relative z-10 max-w-5xl">
-            <div class="reveal active">
+            <div class="reveal">
                 <h2 class="font-serif-elegant gold-title">Bodas de Oro</h2>
             </div>
             
             <h1 class="font-serif-elegant text-6xl md:text-9xl mb-4 vino-name tracking-tighter">Fede & Jovita</h1>
             <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor incondicional</p>
             
-            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
+            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal shadow-2xl mb-12">
                 <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
                 <p class="font-serif-elegant text-2xl md:text-4xl vino-name">Pancho & Carolina</p>
             </div>
 
             <div class="block">
-                <a href="#historia" class="primary-btn px-16 py-6 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Revivir la Historia</a>
+                <a href="#boleto" class="primary-btn px-16 py-6 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Obtener mi Boleto</a>
             </div>
         </div>
     </header>
+
+    <!-- Sección de Boletos de Entrada -->
+    <section id="boleto" class="py-24 px-6 bg-white reveal text-center border-b border-red-900/5">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Pases de Acceso</h3>
+            <p class="text-gray-500 mb-10 italic">Favor de presentar este pase digital al llegar al salón.</p>
+            
+            <div class="ticket reveal">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-serif-elegant text-xs uppercase tracking-tighter text-gray-400">Bodas de Oro</span>
+                    <span class="font-serif-elegant text-xs uppercase tracking-tighter text-gray-400">31.MAY.2026</span>
+                </div>
+                
+                <h4 class="font-serif-elegant text-2xl mb-2 vino-name">Fede & Jovita</h4>
+                <div class="ticket-divider"></div>
+                
+                <div class="py-4">
+                    <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-1">Admisión para:</p>
+                    <p class="font-serif-elegant text-xl vino-name">Pancho & Carolina</p>
+                    <div class="mt-4 inline-block bg-red-50 px-4 py-2 border border-red-900/20 rounded">
+                        <p class="font-bold text-red-900 text-sm">Válido para: 2 PERSONAS</p>
+                    </div>
+                </div>
+
+                <div class="ticket-divider"></div>
+                
+                <div class="flex justify-center py-2">
+                    <!-- QR Decorativo -->
+                    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="maroon" stroke-width="1.5" opacity="0.6">
+                        <path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM15 15h6v6h-6zM7 7h.01M17 7h.01M7 17h.01M17 17h.01M11 3v2M11 7v4M13 3v6M13 11v2M11 13h2M3 11h2M7 11h2M15 11h2M19 11h2M11 15v2M11 19v2M13 15v6M11 21h2" />
+                    </svg>
+                </div>
+                <p class="text-[9px] uppercase tracking-[0.4em] text-gray-300 mt-2 italic">Gala / Etiqueta</p>
+            </div>
+            
+            <p class="mt-8 text-xs text-gray-400 font-light italic">"Su presencia honra nuestra mesa"</p>
+        </div>
+    </section>
 
     <!-- Historia -->
     <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-y border-red-900/10">
@@ -342,12 +420,12 @@
         <div class="modal-content border-t-[15px] border-[#600000] p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeRegalos()">&times;</div>
             <h3 class="font-serif-elegant text-4xl vino-name mb-12 tracking-widest font-bold uppercase">Nuestra Mesa Digital</h3>
-            <div class="space-y-8">
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm text-center">
+            <div class="space-y-8 text-center">
+                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm">
                     <p class="font-bold vino-name mb-2 uppercase tracking-widest text-lg">Liverpool</p>
                     <p class="text-2xl text-gray-700 font-bold">Evento: 50921432</p>
                 </div>
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm text-center">
+                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm">
                     <p class="font-bold vino-name mb-2 uppercase tracking-widest text-lg">Transferencia</p>
                     <p class="text-sm text-gray-600 mb-2">CLABE: 0123 4567 8901 2345 67</p>
                     <p class="text-[11px] text-red-900 font-bold uppercase text-center tracking-tighter">Banco Nacional Prestige</p>
@@ -375,7 +453,6 @@
             openConfetti(3000); 
         }
 
-        // Lógica de aparición on scroll (REPARADA con IntersectionObserver)
         const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -387,7 +464,6 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Funciones Regalos
         function openRegalos() {
             document.getElementById('modalRegalos').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -395,7 +471,6 @@
         }
         function closeRegalos() { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-        // IA Gemini
         async function generatePoem() {
             const wish = document.getElementById('guest-wish').value;
             if (!wish) return;
@@ -422,14 +497,12 @@
             } finally { button.disabled = false; loading.classList.add('hidden'); }
         }
 
-        // Música
         const audio = document.getElementById('bg-audio');
         let musicPlaying = false;
         function playMusic() { if (!musicPlaying) { audio.currentTime = 21; audio.play().then(() => { musicPlaying = true; document.getElementById('music-icon').innerText = '🎵'; }).catch(() => {}); } }
         function toggleMusic() { if (audio.paused) { if (audio.currentTime === 0) audio.currentTime = 21; audio.play(); document.getElementById('music-icon').innerText = '🎵'; musicPlaying = true; } else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; musicPlaying = false; } }
         document.addEventListener('click', playMusic, { once: true });
 
-        // Contador
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
         setInterval(() => {
             const now = new Date().getTime();
