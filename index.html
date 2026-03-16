@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
     
-    <!-- Etiquetas Meta para Miniatura en el Link (Redes Sociales/WhatsApp) -->
+    <!-- Etiquetas Meta para Miniatura en el Link (WhatsApp/Redes Sociales) -->
     <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
-    <meta property="og:description" content="Acompáñanos a celebrar 50 años de amor incondicional.">
+    <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio.">
     <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
+    <meta property="og:url" content="https://fede-y-jovita.github.io">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="Captura de pantalla 2026-03-15 172233.png">
@@ -75,35 +76,36 @@
             box-shadow: 0 20px 45px rgba(0,0,0,0.15);
         }
 
-        /* Estilo de Boleto Digital */
+        /* Diseño de Boleto */
         .ticket {
             position: relative;
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border: 2px solid var(--vino);
-            max-width: 400px;
-            margin: 2rem auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
         }
 
         .ticket::before, .ticket::after {
             content: '';
             position: absolute;
             top: 50%;
-            width: 30px;
-            height: 30px;
-            background: var(--ivory);
+            width: 34px;
+            height: 34px;
+            background: #fff;
             border: 2px solid var(--vino);
             border-radius: 50%;
             transform: translateY(-50%);
+            z-index: 2;
         }
-        .ticket::before { left: -17px; }
-        .ticket::after { right: -17px; }
+        .ticket::before { left: -18px; }
+        .ticket::after { right: -18px; }
 
         .ticket-divider {
             border-top: 2px dashed var(--vino);
-            margin: 1.5rem 0;
-            opacity: 0.3;
+            margin: 2rem 0;
+            opacity: 0.2;
         }
 
         .photo-card {
@@ -116,31 +118,16 @@
             position: relative;
         }
 
-        .countdown-box {
-            background: white;
-            border: 3px solid var(--vino);
-            padding: 1.5rem 0.5rem;
-            min-width: 90px;
-            box-shadow: 0 15px 30px rgba(96, 0, 0, 0.1);
-        }
-
-        .countdown-num {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--vino);
-            line-height: 1;
-        }
-
         .modal-overlay {
             display: none;
             position: fixed;
             z-index: 10000;
             inset: 0;
-            background: rgba(0, 0, 0, 0.92);
+            background: rgba(0, 0, 0, 0.94);
             backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 20px;
         }
 
         .modal-content {
@@ -151,26 +138,27 @@
             overflow-y: auto;
             position: relative;
             border: 6px solid var(--vino);
+            border-radius: 4px;
         }
 
         .close-modal-btn {
             position: absolute;
             top: 15px;
             right: 15px;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: var(--vino);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             cursor: pointer;
             z-index: 10001;
             border: 2px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .reveal {
@@ -191,12 +179,6 @@
             width: 60px; height: 60px; border-radius: 50%; background: var(--vino); color: white;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.4); cursor: pointer; border: 2px solid white;
-        }
-
-        .bg-pattern {
-            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-            pointer-events: none; opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='maroon'/%3E%3C/svg%3E");
         }
     </style>
 </head>
@@ -230,61 +212,22 @@
                 <p class="font-serif-elegant text-2xl md:text-4xl vino-name">Pancho & Carolina</p>
             </div>
 
-            <div class="block">
-                <a href="#boleto" class="primary-btn px-16 py-6 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Obtener mi Boleto</a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#historia" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Nuestra Historia</a>
+                <button onclick="openBoleto()" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg bg-yellow-700">Ver mis Boletos 🎫</button>
             </div>
         </div>
     </header>
 
-    <!-- Sección de Boletos de Entrada -->
-    <section id="boleto" class="py-24 px-6 bg-white reveal text-center border-b border-red-900/5">
-        <div class="max-w-4xl mx-auto">
-            <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Pases de Acceso</h3>
-            <p class="text-gray-500 mb-10 italic">Favor de presentar este pase digital al llegar al salón.</p>
-            
-            <div class="ticket reveal">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="font-serif-elegant text-xs uppercase tracking-tighter text-gray-400">Bodas de Oro</span>
-                    <span class="font-serif-elegant text-xs uppercase tracking-tighter text-gray-400">31.MAY.2026</span>
-                </div>
-                
-                <h4 class="font-serif-elegant text-2xl mb-2 vino-name">Fede & Jovita</h4>
-                <div class="ticket-divider"></div>
-                
-                <div class="py-4">
-                    <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-1">Admisión para:</p>
-                    <p class="font-serif-elegant text-xl vino-name">Pancho & Carolina</p>
-                    <div class="mt-4 inline-block bg-red-50 px-4 py-2 border border-red-900/20 rounded">
-                        <p class="font-bold text-red-900 text-sm">Válido para: 2 PERSONAS</p>
-                    </div>
-                </div>
-
-                <div class="ticket-divider"></div>
-                
-                <div class="flex justify-center py-2">
-                    <!-- QR Decorativo -->
-                    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="maroon" stroke-width="1.5" opacity="0.6">
-                        <path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM15 15h6v6h-6zM7 7h.01M17 7h.01M7 17h.01M17 17h.01M11 3v2M11 7v4M13 3v6M13 11v2M11 13h2M3 11h2M7 11h2M15 11h2M19 11h2M11 15v2M11 19v2M13 15v6M11 21h2" />
-                    </svg>
-                </div>
-                <p class="text-[9px] uppercase tracking-[0.4em] text-gray-300 mt-2 italic">Gala / Etiqueta</p>
-            </div>
-            
-            <p class="mt-8 text-xs text-gray-400 font-light italic">"Su presencia honra nuestra mesa"</p>
-        </div>
-    </section>
-
     <!-- Historia -->
     <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-y border-red-900/10">
-        <div class="bg-pattern"></div>
         <div class="max-w-6xl mx-auto relative z-10">
-            <p class="font-script vino-name text-7xl mb-4">El Inicio de Todo</p>
+            <p class="font-script vino-name text-7xl mb-4 text-center">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
-            <!-- Imagen Principal -->
-            <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'El comienzo de una vida compartida. Aquel día, nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
+            <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'Aquel día nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
                 <img src="Captura de pantalla 2026-03-15 172233.png" alt="Boda Fede y Jovita Principal" class="main-wedding-img">
-                <div class="mt-8">
+                <div class="mt-8 text-center">
                     <p class="font-script vino-name text-5xl mb-4 italic">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[11px] py-3 px-12 uppercase tracking-widest font-bold inline-block rounded-full shadow-lg">Leer historia completa</div>
                 </div>
@@ -296,28 +239,8 @@
                     "Pancho y Carolina, queremos compartir con ustedes los momentos que forjaron este camino de amor."
                 </p>
                 <p class="text-gray-600 font-light leading-loose text-lg">
-                    Desde aquel día hasta las canas de hoy, cada segundo ha valido la pena. Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
+                    Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
                 </p>
-            </div>
-
-            <!-- Galería -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
-                <div class="photo-card lg:col-span-2 reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
-                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic">La melodía de nuestro amor</p>
-                </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 object-cover">
-                </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 object-cover">
-                </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 object-cover">
-                </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos sigue siendo el mismo.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg" alt="Cena 2" class="w-full h-64 object-cover">
-                </div>
             </div>
         </div>
     </section>
@@ -326,7 +249,7 @@
     <section id="ia-dedicatoria" class="py-24 px-6 bg-white reveal">
         <div class="max-w-3xl mx-auto text-center">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Dedicatoria Poética ✨</h3>
-            <p class="text-gray-500 mb-10 italic">Escriban un deseo para Fede y Jovita y nuestra IA lo transformará en una postal de gala.</p>
+            <p class="text-gray-500 mb-10 italic">Escriban un deseo y nuestra IA lo transformará en una dedicatoria de gala.</p>
             <div class="bg-[#fcf4f4] p-10 rounded-xl border border-red-900/10 shadow-2xl">
                 <textarea id="guest-wish" class="w-full p-6 border border-red-900/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-900 mb-6 h-32 text-lg" placeholder="Ej: Que sigan siempre así de felices..."></textarea>
                 <button id="ai-button" onclick="generatePoem()" class="primary-btn px-16 py-5 rounded-full text-[11px] uppercase tracking-widest font-bold">Transformar mi deseo ✨</button>
@@ -342,7 +265,7 @@
     <section id="regalos" class="py-24 px-6 bg-[#fffcf9] text-center reveal border-y border-red-900/5">
         <div class="max-w-2xl mx-auto">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest">Mesa de Regalos</h3>
-            <p class="text-gray-500 mb-12 italic leading-relaxed text-lg">"Su presencia es nuestro mayor regalo. No obstante, si desean tener un detalle adicional, pueden consultar nuestras mesas digitales aquí."</p>
+            <p class="text-gray-500 mb-12 italic leading-relaxed text-lg">Su presencia es nuestro mayor regalo.</p>
             <button onclick="openRegalos()" class="primary-btn px-16 py-6 rounded-full text-[12px] uppercase tracking-widest font-bold shadow-2xl">Ver Mesa Digital 🎊</button>
         </div>
     </section>
@@ -351,14 +274,12 @@
     <section id="itinerario" class="py-24 px-6 bg-[#f7e8e8] reveal border-b border-red-900/10">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12 text-center">
-                <div class="bg-white p-12 border-t-8 border-vino shadow-2xl rounded-sm">
-                    <p class="font-serif-elegant text-[12px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Ceremonia</p>
+                <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
                     <p class="vino-name font-bold text-5xl mb-6">15:00 HRS</p>
-                    <button onclick="window.open('https://share.google/dgMPErrRtKefO1r9T', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Google Maps</button>
+                    <button onclick="window.open('https://share.google/dgMPErrRtKefO1r9T', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Ver Iglesia</button>
                 </div>
-                <div class="bg-white p-12 border-t-8 border-vino shadow-2xl rounded-sm">
-                    <p class="font-serif-elegant text-[12px] tracking-[0.5em] vino-name mb-6 uppercase font-bold">La Fiesta</p>
+                <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
                     <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">SALÓN EL CORONADO</h4>
                     <p class="vino-name font-bold text-5xl mb-6">16:00 HRS</p>
                     <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Ver Mapa</button>
@@ -367,153 +288,129 @@
         </div>
     </section>
 
-    <!-- Contador -->
-    <section class="py-24 bg-white text-center reveal px-4">
-        <div class="max-w-5xl mx-auto">
-            <p class="font-serif-elegant vino-name text-[16px] tracking-[1em] mb-16 uppercase font-bold">La cuenta regresiva</p>
-            <div id="countdown" class="flex flex-wrap justify-center gap-6 md:gap-12">
-                <div class="countdown-box flex flex-col items-center">
-                    <span id="days" class="countdown-num">00</span>
-                    <span class="text-[11px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Días</span>
-                </div>
-                <div class="countdown-box flex flex-col items-center">
-                    <span id="hours" class="countdown-num">00</span>
-                    <span class="text-[11px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Horas</span>
-                </div>
-                <div class="countdown-box flex flex-col items-center">
-                    <span id="minutes" class="countdown-num">00</span>
-                    <span class="text-[11px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Minutos</span>
-                </div>
-                <div class="countdown-box flex flex-col items-center">
-                    <span id="seconds" class="countdown-num">00</span>
-                    <span class="text-[11px] uppercase tracking-widest mt-4 text-gray-500 font-bold">Segundos</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Confirmación -->
-    <section class="py-32 bg-[#fdf2f2] text-center px-6 reveal">
+    <!-- Confirmación y Botón de Boletos Final -->
+    <section class="py-32 bg-white text-center px-6 reveal">
         <div class="max-w-xl mx-auto">
-            <h2 class="font-serif-elegant text-5xl mb-8 vino-name font-bold uppercase">Confirmación</h2>
-            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] w-full sm:w-auto mx-auto shadow-2xl">
-                CONFIRMAR ASISTENCIA
-            </button>
-            <div class="mt-24 opacity-60 text-[12px] tracking-[1.5em] uppercase vino-name font-bold">Vestimenta: Gala</div>
+            <h2 class="font-serif-elegant text-5xl mb-8 vino-name font-bold uppercase">Asistencia</h2>
+            <div class="flex flex-col gap-6">
+                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] shadow-2xl">
+                    CONFIRMAR ASISTENCIA
+                </button>
+                <button onclick="openBoleto()" class="primary-btn px-16 py-6 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] shadow-2xl bg-yellow-700">
+                    VER MIS PASES DIGITALES 🎫
+                </button>
+            </div>
+            <div class="mt-24 opacity-60 text-[12px] tracking-[1.5em] uppercase vino-name font-bold text-center">Vestimenta: Gala</div>
         </div>
     </section>
 
-    <!-- Modales -->
-    <div id="modalStory" class="modal-overlay" onclick="closeStory()">
-        <div class="modal-content animate-in fade-in duration-500" onclick="event.stopPropagation()">
-            <div class="close-modal-btn" onclick="closeStory()">&times;</div>
-            <img id="storyImg" src="" class="w-full h-72 md:h-[55vh] object-cover" alt="Historia">
-            <div class="p-12 text-center">
-                <h4 id="storyTitle" class="font-serif-elegant text-4xl vino-name mb-8 uppercase font-bold"></h4>
-                <p id="storyContent" class="text-gray-700 leading-loose text-2xl italic px-4"></p>
-                <button onclick="closeStory()" class="mt-14 text-[12px] uppercase tracking-widest font-bold text-red-900 border-b-2 border-red-900 pb-2">Cerrar</button>
+    <!-- Modal de Boletos Digitales -->
+    <div id="modalBoleto" class="modal-overlay" onclick="closeBoleto()">
+        <div class="modal-content p-8 sm:p-12 text-center" onclick="event.stopPropagation()">
+            <div class="close-modal-btn" onclick="closeBoleto()">&times;</div>
+            <h3 class="font-serif-elegant text-3xl vino-name mb-10 tracking-widest font-bold uppercase">Pase de Acceso</h3>
+            
+            <div class="ticket shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Boda de Oro</span>
+                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">31.05.2026</span>
+                </div>
+                
+                <h4 class="font-serif-elegant text-3xl mb-2 vino-name">Fede & Jovita</h4>
+                <p class="font-script text-2xl text-gray-400">Bodas de Oro</p>
+                
+                <div class="ticket-divider"></div>
+                
+                <div class="py-6">
+                    <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2">Pase exclusivo para:</p>
+                    <p class="font-serif-elegant text-2xl vino-name mb-4">Pancho & Carolina</p>
+                    <div class="inline-block bg-red-900 text-white px-6 py-2 rounded-full font-bold text-xs tracking-widest">
+                        ADMITE: 2 PERSONAS
+                    </div>
+                </div>
+
+                <div class="ticket-divider"></div>
+                
+                <div class="flex flex-col items-center gap-4 py-4">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Pase para Pancho %26 Carolina - Bodas de Oro Fede %26 Jovita" 
+                         alt="QR Personalizado" 
+                         class="border-8 border-white shadow-xl w-40 h-40">
+                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic">Código de Seguridad Único</p>
+                </div>
             </div>
+            
+            <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400">Regresar</button>
+        </div>
+    </div>
+
+    <!-- Modales de Historia y Regalos -->
+    <div id="modalStory" class="modal-overlay" onclick="closeStory()">
+        <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
+            <div class="close-modal-btn" onclick="closeStory()">&times;</div>
+            <img id="storyImg" src="" class="w-full h-72 md:h-[50vh] object-cover mb-8" alt="Historia">
+            <h4 id="storyTitle" class="font-serif-elegant text-3xl vino-name mb-6"></h4>
+            <p id="storyContent" class="text-gray-700 leading-loose text-xl italic px-4"></p>
         </div>
     </div>
 
     <div id="modalRegalos" class="modal-overlay" onclick="closeRegalos()">
-        <div class="modal-content border-t-[15px] border-[#600000] p-12 text-center" onclick="event.stopPropagation()">
+        <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeRegalos()">&times;</div>
-            <h3 class="font-serif-elegant text-4xl vino-name mb-12 tracking-widest font-bold uppercase">Nuestra Mesa Digital</h3>
-            <div class="space-y-8 text-center">
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm">
-                    <p class="font-bold vino-name mb-2 uppercase tracking-widest text-lg">Liverpool</p>
-                    <p class="text-2xl text-gray-700 font-bold">Evento: 50921432</p>
-                </div>
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded-lg shadow-sm">
-                    <p class="font-bold vino-name mb-2 uppercase tracking-widest text-lg">Transferencia</p>
-                    <p class="text-sm text-gray-600 mb-2">CLABE: 0123 4567 8901 2345 67</p>
-                    <p class="text-[11px] text-red-900 font-bold uppercase text-center tracking-tighter">Banco Nacional Prestige</p>
+            <h3 class="font-serif-elegant text-4xl vino-name mb-12 uppercase">Mesa Digital</h3>
+            <div class="space-y-8">
+                <div class="p-10 border border-red-100 bg-red-50/20 rounded shadow-sm text-center">
+                    <p class="font-bold vino-name uppercase text-lg">Liverpool</p>
+                    <p class="text-2xl text-gray-700 font-bold">50921432</p>
                 </div>
             </div>
-            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400">Cerrar Ventana</button>
+            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400">Cerrar</button>
         </div>
     </div>
 
     <script>
         const apiKey = ""; 
 
-        // Confeti de bienvenida ✨
-        function openConfetti(duration) {
-            var end = Date.now() + duration;
+        // Inicialización segura
+        document.addEventListener('DOMContentLoaded', function() {
+            // Confeti de bienvenida por 3 segundos ✨
+            var end = Date.now() + 3000;
             var colors = ['#bf953f', '#fcf6ba', '#b38728'];
             (function frame() {
-                confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
-                confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                    confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                }
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
-        }
 
-        window.onload = function() {
-            openConfetti(3000); 
-        }
+            // Intersection Observer para animaciones (Reemplaza la función reveal problemática)
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.target) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (el instanceof Element) observer.observe(el);
+                });
+            }
+        });
 
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        function openRegalos() {
-            document.getElementById('modalRegalos').style.display = 'flex';
+        // Funciones Modales
+        function openBoleto() { document.getElementById('modalBoleto').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeBoleto() { document.getElementById('modalBoleto').style.display = 'none'; document.body.style.overflow = 'auto'; }
+        
+        function openRegalos() { 
+            document.getElementById('modalRegalos').style.display = 'flex'; 
             document.body.style.overflow = 'hidden';
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
+            }
         }
         function closeRegalos() { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-        async function generatePoem() {
-            const wish = document.getElementById('guest-wish').value;
-            if (!wish) return;
-            const button = document.getElementById('ai-button');
-            const loading = document.getElementById('ai-loading');
-            const resultCont = document.getElementById('ai-result-container');
-            const resultText = document.getElementById('ai-result');
-            button.disabled = true; loading.classList.remove('hidden'); resultCont.classList.add('hidden');
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: `Deseo del invitado: "${wish}"` }] }],
-                        systemInstruction: { parts: [{ text: "Eres un poeta experto en bodas de oro. Transforma este deseo en una dedicatoria muy elegante, breve (4 versos) en español." }] }
-                    })
-                });
-                const data = await response.json();
-                resultText.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Luz y amor eterno.";
-                resultCont.classList.remove('hidden');
-            } catch (e) {
-                resultText.innerText = "Cincuenta años de amor y luz, guiados siempre por su fe y unión.";
-                resultCont.classList.remove('hidden');
-            } finally { button.disabled = false; loading.classList.add('hidden'); }
-        }
-
-        const audio = document.getElementById('bg-audio');
-        let musicPlaying = false;
-        function playMusic() { if (!musicPlaying) { audio.currentTime = 21; audio.play().then(() => { musicPlaying = true; document.getElementById('music-icon').innerText = '🎵'; }).catch(() => {}); } }
-        function toggleMusic() { if (audio.paused) { if (audio.currentTime === 0) audio.currentTime = 21; audio.play(); document.getElementById('music-icon').innerText = '🎵'; musicPlaying = true; } else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; musicPlaying = false; } }
-        document.addEventListener('click', playMusic, { once: true });
-
-        const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-            if (document.getElementById("days")) {
-                document.getElementById("days").innerText = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
-                document.getElementById("hours").innerText = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
-                document.getElementById("minutes").innerText = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
-                document.getElementById("seconds").innerText = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000)).toString().padStart(2, '0');
-            }
-        }, 1000);
 
         function openStory(img, title, content) {
             document.getElementById('storyImg').src = img;
@@ -521,9 +418,39 @@
             document.getElementById('storyContent').innerText = content;
             document.getElementById('modalStory').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            if (audio.paused && !musicPlaying) playMusic();
         }
         function closeStory() { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        // IA Gemini
+        async function generatePoem() {
+            const wish = document.getElementById('guest-wish').value;
+            if (!wish) return;
+            const btn = document.getElementById('ai-button');
+            const load = document.getElementById('ai-loading');
+            const resCont = document.getElementById('ai-result-container');
+            const resTxt = document.getElementById('ai-result');
+            btn.disabled = true; load.classList.remove('hidden'); resCont.classList.add('hidden');
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Deseo: "${wish}"` }] }],
+                        systemInstruction: { parts: [{ text: "Eres un poeta. Transforma este deseo en una dedicatoria de gala breve (4 versos) para Fede y Jovita por sus 50 años." }] }
+                    })
+                });
+                const data = await response.json();
+                resTxt.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Amor eterno.";
+                resCont.classList.remove('hidden');
+            } catch (e) { resTxt.innerText = "50 años de amor y luz."; resCont.classList.remove('hidden'); }
+            finally { btn.disabled = false; load.classList.add('hidden'); }
+        }
+
+        // Música
+        const audio = document.getElementById('bg-audio');
+        function playMusic() { audio.currentTime = 21; audio.play().catch(() => {}); }
+        function toggleMusic() { if (audio.paused) { audio.play(); document.getElementById('music-icon').innerText = '🎵'; } else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; } }
+        document.addEventListener('click', () => { if (audio.paused) playMusic(); }, { once: true });
     </script>
 </body>
 </html>
