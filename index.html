@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
     
-    <!-- Etiquetas Meta para Miniatura en el Link (WhatsApp/Redes Sociales) -->
+    <!-- Etiquetas Meta para Miniatura en el Link -->
     <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
-    <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio.">
+    <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio el 21 de mayo de 2026.">
     <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
     <meta property="og:url" content="https://fede-y-jovita.github.io">
     <meta property="og:type" content="website">
@@ -17,6 +17,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --vino: #600000;
@@ -76,7 +77,6 @@
             box-shadow: 0 20px 45px rgba(0,0,0,0.15);
         }
 
-        /* Estilo de Boleto Digital */
         .ticket {
             position: relative;
             background: white;
@@ -102,11 +102,7 @@
         .ticket::before { left: -18px; }
         .ticket::after { right: -18px; }
 
-        .ticket-divider {
-            border-top: 2px dashed var(--vino);
-            margin: 2rem 0;
-            opacity: 0.2;
-        }
+        .ticket-divider { border-top: 2px dashed var(--vino); margin: 2rem 0; opacity: 0.2; }
 
         .modal-overlay {
             display: none;
@@ -148,19 +144,10 @@
             cursor: pointer;
             z-index: 10001;
             border: 2px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         .vino-name { color: var(--vino); font-weight: bold; }
 
@@ -170,11 +157,70 @@
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.4); cursor: pointer; border: 2px solid white;
         }
+
+        #checkin-alert {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100000;
+            background: var(--vino);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid #bf953f;
+            text-align: center;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown { from { transform: translate(-50%, -100%); } to { transform: translate(-50%, 0); } }
+
+        /* Estilos del Contador */
+        .countdown-item {
+            background: white;
+            border: 1px solid rgba(96, 0, 0, 0.2);
+            padding: 1.5rem 1rem;
+            min-width: 80px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .countdown-val {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--vino);
+            line-height: 1;
+        }
+
+        /* Estilos del Panel Admin */
+        #admin-panel {
+            display: none;
+            background: white;
+            margin: 4rem auto;
+            max-width: 800px;
+            padding: 2rem;
+            border: 4px double var(--vino);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .photo-card {
+            padding: 12px;
+            background: white;
+            border: 1px solid rgba(96, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Control de Música -->
+    <div id="checkin-alert" class="font-serif-elegant font-bold uppercase text-xs tracking-widest">
+        ✨ ¡Bienvenido! Acceso Confirmado ✨
+    </div>
+
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
             <span id="music-icon" style="font-size: 26px;">🎵</span>
@@ -190,16 +236,15 @@
         <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-white z-0"></div>
 
         <div class="relative z-10 max-w-5xl">
-            <div class="reveal">
+            <div class="reveal active">
                 <h2 class="font-serif-elegant gold-title">Bodas de Oro</h2>
             </div>
             
             <h1 class="font-serif-elegant text-6xl md:text-9xl mb-4 vino-name tracking-tighter">Fede & Jovita</h1>
             <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor incondicional</p>
             
-            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal shadow-2xl mb-12">
+            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
                 <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold text-center">Invitados de Honor:</p>
-                <!-- NOMBRE DINÁMICO 1 -->
                 <p id="guest-name-header" class="font-serif-elegant text-2xl md:text-4xl vino-name text-center">Invitado especial</p>
             </div>
 
@@ -210,8 +255,34 @@
         </div>
     </header>
 
+    <!-- Contador de Tiempo -->
+    <section class="py-20 bg-white text-center reveal border-y border-red-900/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="font-serif-elegant text-[13px] tracking-[0.8em] mb-12 uppercase font-bold vino-name">Faltan solo...</p>
+            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8">
+                <div class="countdown-item flex flex-col items-center">
+                    <span id="days" class="countdown-val">00</span>
+                    <span class="text-[9px] uppercase tracking-widest mt-2 text-gray-400 font-bold">Días</span>
+                </div>
+                <div class="countdown-item flex flex-col items-center">
+                    <span id="hours" class="countdown-val">00</span>
+                    <span class="text-[9px] uppercase tracking-widest mt-2 text-gray-400 font-bold">Horas</span>
+                </div>
+                <div class="countdown-item flex flex-col items-center">
+                    <span id="minutes" class="countdown-val">00</span>
+                    <span class="text-[9px] uppercase tracking-widest mt-2 text-gray-400 font-bold">Minutos</span>
+                </div>
+                <div class="countdown-item flex flex-col items-center">
+                    <span id="seconds" class="countdown-val">00</span>
+                    <span class="text-[9px] uppercase tracking-widest mt-2 text-gray-400 font-bold">Segundos</span>
+                </div>
+            </div>
+            <p class="mt-12 font-serif-elegant text-xl vino-name tracking-widest font-bold">21 DE MAYO DEL 2026</p>
+        </div>
+    </section>
+
     <!-- Historia -->
-    <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-y border-red-900/10">
+    <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-b border-red-900/10">
         <div class="max-w-6xl mx-auto relative z-10">
             <p class="font-script vino-name text-7xl mb-4 text-center">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
@@ -226,7 +297,6 @@
 
             <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24 reveal">
                 <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase text-center md:text-left">Medio Siglo de Bendiciones</h3>
-                <!-- NOMBRE DINÁMICO 2 -->
                 <p id="guest-text-story" class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
                     Querido invitado, queremos compartir contigo los momentos que forjaron este camino de amor.
                 </p>
@@ -234,6 +304,42 @@
                     Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
                 </p>
             </div>
+
+            <!-- Galería de Recuerdos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                <div class="photo-card lg:col-span-2 reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
+                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
+                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic text-center">La melodía de nuestro amor</p>
+                </div>
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos sigue siendo el mismo.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg" alt="Cena 2" class="w-full h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel de Administrador (Oculto por defecto) -->
+    <section id="admin-panel" class="reveal px-6">
+        <h3 class="font-serif-elegant text-2xl vino-name mb-8 uppercase text-center font-bold">Registro de Entradas (Admin)</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-red-50 text-red-900 uppercase text-[10px] tracking-widest">
+                        <th class="p-4 border">Invitado</th>
+                        <th class="p-4 border">Fecha y Hora</th>
+                    </tr>
+                </thead>
+                <tbody id="checkin-list" class="text-sm"></tbody>
+            </table>
         </div>
     </section>
 
@@ -241,97 +347,70 @@
     <section id="regalos" class="py-24 px-6 bg-white text-center reveal border-y border-red-900/5">
         <div class="max-w-2xl mx-auto">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest text-center">Mesa de Regalos</h3>
-            <p class="text-gray-500 mb-12 italic leading-relaxed text-lg text-center">Su presencia es nuestro mayor regalo.</p>
-            <div class="flex justify-center">
-                <button onclick="openRegalos()" class="primary-btn px-16 py-6 rounded-full text-[12px] uppercase tracking-widest font-bold shadow-2xl">Ver Mesa Digital 🎊</button>
-            </div>
+            <p class="text-gray-500 mb-12 italic text-center text-lg">Su presencia es nuestro mayor regalo.</p>
+            <button onclick="openRegalos()" class="primary-btn px-16 py-6 rounded-full text-[12px] uppercase tracking-widest shadow-2xl">Ver Mesa Digital 🎊</button>
         </div>
     </section>
 
     <!-- Itinerario -->
-    <section id="itinerario" class="py-24 px-6 bg-[#f7e8e8] reveal border-b border-red-900/10">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 text-center">
-                <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
-                    <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
-                    <p class="vino-name font-bold text-5xl mb-6 text-center">15:00 HRS</p>
-                    <button onclick="window.open('https://share.google/dgMPErrRtKefO1r9T', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Ver Iglesia</button>
-                </div>
-                <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
-                    <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">SALÓN EL CORONADO</h4>
-                    <p class="vino-name font-bold text-5xl mb-6 text-center">16:00 HRS</p>
-                    <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px] uppercase tracking-widest">Ver Mapa</button>
-                </div>
+    <section id="itinerario" class="py-24 px-6 bg-[#f7e8e8] reveal border-b border-red-900/10 text-center">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+            <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
+                <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
+                <p class="vino-name font-bold text-5xl mb-6 text-center">15:00 HRS</p>
+                <button onclick="window.open('https://share.google/dgMPErrRtKefO1r9T', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px]">Ver Iglesia</button>
+            </div>
+            <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
+                <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">SALÓN EL CORONADO</h4>
+                <p class="vino-name font-bold text-5xl mb-6 text-center">16:00 HRS</p>
+                <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px]">Ver Mapa</button>
             </div>
         </div>
     </section>
 
-    <!-- Confirmación -->
+    <!-- Asistencia -->
     <section class="py-32 bg-white text-center px-6 reveal">
         <div class="max-w-xl mx-auto">
-            <h2 class="font-serif-elegant text-5xl mb-8 vino-name font-bold uppercase text-center">Asistencia</h2>
+            <h2 class="font-serif-elegant text-5xl mb-8 vino-name uppercase text-center">Asistencia</h2>
             <div class="flex flex-col gap-6 items-center">
-                <!-- NOMBRE DINÁMICO 3 -->
-                <p id="guest-name-confirm" class="text-gray-600 text-lg mb-4 italic text-center text-center">¡Te esperamos!</p>
-                
-                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] shadow-2xl w-full max-w-sm">
-                    CONFIRMAR ASISTENCIA
-                </button>
-                <button onclick="openBoleto()" class="primary-btn px-16 py-6 rounded-full flex items-center justify-center gap-4 text-xs tracking-[0.3em] shadow-2xl bg-yellow-700 w-full max-w-sm">
-                    VER MIS PASES DIGITALES 🎫
-                </button>
+                <p id="guest-name-confirm" class="text-gray-600 text-lg mb-4 italic text-center">¡Te esperamos!</p>
+                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full text-xs tracking-[0.3em] w-full max-w-sm shadow-2xl uppercase">Confirmar Asistencia</button>
+                <button onclick="openBoleto()" class="primary-btn px-16 py-6 rounded-full text-xs tracking-[0.3em] bg-yellow-700 w-full max-w-sm shadow-2xl uppercase font-bold">Ver mis Pases 🎫</button>
             </div>
             <div class="mt-24 opacity-60 text-[12px] tracking-[1.5em] uppercase vino-name font-bold text-center">Vestimenta: Gala</div>
         </div>
     </section>
 
-    <!-- Modal de Boletos Digitales (Personalizable) -->
+    <!-- Modal Boletos -->
     <div id="modalBoleto" class="modal-overlay" onclick="closeBoleto()">
         <div class="modal-content p-8 sm:p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeBoleto()">&times;</div>
-            <h3 class="font-serif-elegant text-3xl vino-name mb-10 tracking-widest font-bold uppercase text-center">Pase de Acceso</h3>
-            
+            <h3 class="font-serif-elegant text-3xl vino-name mb-10 uppercase text-center">Pase de Acceso</h3>
             <div class="ticket shadow-2xl">
                 <div class="flex justify-between items-center mb-6">
-                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Boda de Oro</span>
-                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">31.05.2026</span>
+                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Bodas de Oro</span>
+                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">21.05.2026</span>
                 </div>
-                
                 <h4 class="font-serif-elegant text-3xl mb-2 vino-name text-center">Fede & Jovita</h4>
-                <p class="font-script text-2xl text-gray-400 text-center">Bodas de Oro</p>
-                
                 <div class="ticket-divider"></div>
-                
-                <div class="py-6">
-                    <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center text-center">Pase exclusivo para:</p>
-                    <!-- NOMBRE DINÁMICO 4 (BOLETO) -->
-                    <p id="guest-name-ticket" class="font-serif-elegant text-2xl vino-name mb-4 text-center">Invitado especial</p>
-                    <div class="inline-block bg-red-900 text-white px-6 py-2 rounded-full font-bold text-xs tracking-widest">
-                        ADMITE: ACCESO FAMILIAR
-                    </div>
-                </div>
-
+                <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center">Pase exclusivo para:</p>
+                <p id="guest-name-ticket" class="font-serif-elegant text-2xl vino-name mb-4 text-center">Invitado especial</p>
                 <div class="ticket-divider"></div>
-                
                 <div class="flex flex-col items-center gap-4 py-4">
-                    <!-- QR DINÁMICO -->
-                    <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Pase de Acceso - Bodas de Oro Fede y Jovita" 
-                         alt="QR Personalizado" 
-                         class="border-8 border-white shadow-xl w-40 h-40">
-                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Válido para entrada al salón</p>
+                    <img id="qr-code-img" src="" alt="QR" class="border-8 border-white shadow-xl w-40 h-40">
+                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Escanea al llegar para registrar tu entrada</p>
                 </div>
             </div>
-            
-            <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400 text-center">Regresar</button>
+            <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase text-gray-400 text-center">Regresar</button>
         </div>
     </div>
 
-    <!-- Modales de Historia y Regalos -->
+    <!-- Modales Adicionales -->
     <div id="modalStory" class="modal-overlay" onclick="closeStory()">
         <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeStory()">&times;</div>
-            <img id="storyImg" src="" class="w-full h-72 md:h-[50vh] object-cover mb-8" alt="Historia">
-            <h4 id="storyTitle" class="font-serif-elegant text-3xl vino-name mb-6 text-center"></h4>
+            <img id="storyImg" src="" class="w-full h-72 object-cover mb-8 shadow-lg" alt="Foto">
+            <h4 id="storyTitle" class="font-serif-elegant text-3xl vino-name mb-6 text-center uppercase"></h4>
             <p id="storyContent" class="text-gray-700 leading-loose text-xl italic px-4 text-center"></p>
         </div>
     </div>
@@ -339,116 +418,146 @@
     <div id="modalRegalos" class="modal-overlay" onclick="closeRegalos()">
         <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeRegalos()">&times;</div>
-            <h3 class="font-serif-elegant text-4xl vino-name mb-12 uppercase text-center">Mesa Digital</h3>
-            <div class="space-y-8">
-                <div class="p-10 border border-red-100 bg-red-50/20 rounded shadow-sm text-center">
-                    <p class="font-bold vino-name uppercase text-lg text-center">Liverpool</p>
-                    <p class="text-2xl text-gray-700 font-bold text-center">50921432</p>
-                </div>
+            <h3 class="font-serif-elegant text-4xl vino-name mb-12 uppercase text-center font-bold">Mesa Digital</h3>
+            <div class="p-10 border border-red-100 bg-red-50/20 rounded shadow-sm text-center">
+                <p class="font-bold vino-name uppercase text-lg">Liverpool</p>
+                <p class="text-2xl text-gray-700 font-bold">50921432</p>
             </div>
-            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400 text-center">Cerrar</button>
+            <button onclick="closeRegalos()" class="mt-12 text-[12px] text-gray-400 uppercase tracking-widest">Cerrar Ventana</button>
         </div>
     </div>
 
-    <script>
-        // --- FUNCIÓN DE PERSONALIZACIÓN POR URL ---
-        function personalizarInvitacion() {
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fede-jovita-50';
+
+        // Fecha del evento: 21 de Mayo 2026
+        const eventDate = new Date(2026, 4, 21, 15, 0, 0).getTime();
+
+        async function initApp() {
+            await signInAnonymously(auth);
             const urlParams = new URLSearchParams(window.location.search);
-            let nombreInvitado = urlParams.get('nombre');
+            const nombreParam = urlParams.get('nombre') || "Invitado Especial";
+            const modoRegistro = urlParams.get('checkin') === 'true';
+            const esAdmin = urlParams.get('admin') === 'true';
 
-            // 1. Manejo del valor por defecto
-            if (!nombreInvitado || nombreInvitado.trim() === "") {
-                nombreInvitado = "Invitado Especial";
-            }
-
-            // 2. Limpieza para TEXTO VISIBLE: Reemplazamos guiones por espacios para que se vea bien
-            let nombreLimpio = decodeURIComponent(nombreInvitado).replace(/-/g, ' ');
-
-            // 3. Preparación para LÓGICA INTERNA: Reemplazamos espacios por guiones
+            let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
             let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
 
-            // 4. Inserción en elementos visibles
-            const elHeader = document.getElementById('guest-name-header');
-            const elTicket = document.getElementById('guest-name-ticket');
-            const elConfirm = document.getElementById('guest-name-confirm');
-            const elStory = document.getElementById('guest-text-story');
-            const elQR = document.getElementById('qr-code-img');
+            // Personalizar textos
+            document.getElementById('guest-name-header').innerText = nombreLimpio;
+            document.getElementById('guest-name-ticket').innerText = nombreLimpio;
+            document.getElementById('guest-name-confirm').innerText = `¡${nombreLimpio}, te esperamos!`;
+            document.getElementById('guest-text-story').innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-            if (elHeader) elHeader.innerText = nombreLimpio;
-            if (elTicket) elTicket.innerText = nombreLimpio;
-            if (elConfirm) elConfirm.innerText = `¡${nombreLimpio}, te esperamos!`;
-            if (elStory) elStory.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
-            
-            // 5. Actualización del QR usando el nombre con guiones para la "URL interna" de datos
+            // Generar QR
+            const baseUrl = window.location.origin + window.location.pathname;
+            const elQR = document.getElementById('qr-code-img');
             if (elQR) {
-                const qrData = encodeURIComponent(`Pase-para-${nombreParaURL}-Bodas-de-Oro-Fede-y-Jovita`);
-                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
+                const checkinUrl = `${baseUrl}?nombre=${nombreParaURL}&checkin=true`;
+                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
+            }
+
+            // Registro
+            if (modoRegistro) {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'), {
+                    invitado: nombreLimpio,
+                    fecha: serverTimestamp()
+                });
+                const alertBox = document.getElementById('checkin-alert');
+                alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Entrada Confirmada. ✨`;
+                alertBox.style.display = 'block';
+                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
+                setTimeout(() => alertBox.style.display = 'none', 6000);
+            }
+
+            // Admin
+            if (esAdmin) {
+                const adminSection = document.getElementById('admin-panel');
+                adminSection.style.display = 'block';
+                const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'));
+                const list = document.getElementById('checkin-list');
+                const data = [];
+                querySnapshot.forEach(doc => data.push(doc.data()));
+                data.sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
+                list.innerHTML = data.map(item => `
+                    <tr>
+                        <td class="p-4 border font-bold">${item.invitado}</td>
+                        <td class="p-4 border text-gray-500">${item.fecha ? new Date(item.fecha.seconds * 1000).toLocaleString() : 'Reciente'}</td>
+                    </tr>
+                `).join('');
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            personalizarInvitacion();
+        // Lógica del Contador
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            const d = Math.max(0, Math.floor(distance / 86400000));
+            const h = Math.max(0, Math.floor((distance % 86400000) / 3600000));
+            const m = Math.max(0, Math.floor((distance % 3600000) / 60000));
+            const s = Math.max(0, Math.floor((distance % 60000) / 1000));
 
-            // Confeti de bienvenida
-            var end = Date.now() + 3000;
-            var colors = ['#bf953f', '#fcf6ba', '#b38728'];
-            (function frame() {
-                if (typeof confetti === 'function') {
+            document.getElementById("days").innerText = d.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // Confeti inicial
+            setTimeout(() => {
+                var end = Date.now() + 3000;
+                var colors = ['#bf953f', '#fcf6ba', '#b38728'];
+                (function frame() {
                     confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
                     confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
-                }
-                if (Date.now() < end) requestAnimationFrame(frame);
-            }());
+                    if (Date.now() < end) requestAnimationFrame(frame);
+                }());
+            }, 800);
 
-            // Animaciones al hacer scroll
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting && entry.target) {
-                            entry.target.classList.add('active');
-                        }
-                    });
-                }, { threshold: 0.1 });
-                
-                document.querySelectorAll('.reveal').forEach(el => {
-                    if (el instanceof Element) observer.observe(el);
-                });
-            } else {
-                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            }
+            // Animaciones scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
 
-        // Modales
-        function openBoleto() { document.getElementById('modalBoleto').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeBoleto() { document.getElementById('modalBoleto').style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function openRegalos() { 
-            document.getElementById('modalRegalos').style.display = 'flex'; 
-            document.body.style.overflow = 'hidden';
-            if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
-        }
-        function closeRegalos() { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function openStory(img, title, content) {
+        // Audio
+        const audio = document.getElementById('bg-audio');
+        let audioIniciado = false;
+        window.toggleMusic = () => { 
+            if (audio.paused) { audio.play(); document.getElementById('music-icon').innerText = '🎵'; } 
+            else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; } 
+        };
+        document.addEventListener('click', () => { 
+            if (audio.paused && !audioIniciado) { audio.currentTime = 21; audio.play(); audioIniciado = true; } 
+        }, { once: true });
+
+        // Modales globales
+        window.openBoleto = () => { document.getElementById('modalBoleto').style.display = 'flex'; document.body.style.overflow = 'hidden'; };
+        window.closeBoleto = () => { document.getElementById('modalBoleto').style.display = 'none'; document.body.style.overflow = 'auto'; };
+        window.openRegalos = () => { document.getElementById('modalRegalos').style.display = 'flex'; document.body.style.overflow = 'hidden'; if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
+        window.closeRegalos = () => { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; };
+        window.openStory = (img, title, content) => {
             document.getElementById('storyImg').src = img;
             document.getElementById('storyTitle').innerText = title;
             document.getElementById('storyContent').innerText = content;
             document.getElementById('modalStory').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-        }
-        function closeStory() { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-        // Música
-        const audio = document.getElementById('bg-audio');
-        let audioIniciado = false;
-        function playMusic() { 
-            if (!audioIniciado) { audio.currentTime = 21; audioIniciado = true; }
-            audio.play().catch(() => {});
-        }
-        function toggleMusic() { 
-            if (audio.paused) { playMusic(); document.getElementById('music-icon').innerText = '🎵'; } 
-            else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; } 
-        }
-        document.addEventListener('touchstart', function() { if (audio.paused && !audioIniciado) playMusic(); }, { once: true });
-        document.addEventListener('click', function() { if (audio.paused && !audioIniciado) playMusic(); }, { once: true });
+        };
+        window.closeStory = () => { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; };
     </script>
 </body>
 </html>
