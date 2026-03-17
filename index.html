@@ -15,7 +15,8 @@
     <meta name="twitter:image" content="Captura de pantalla 2026-03-15 172233.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Actualizado a la versión más reciente del confeti para mayor estabilidad -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
@@ -178,25 +179,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4); cursor: pointer; border: 2px solid white;
         }
 
-        #checkin-alert {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100000;
-            background: var(--vino);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid #bf953f;
-            text-align: center;
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown { from { transform: translate(-50%, -100%); } to { transform: translate(-50%, 0); } }
-
         .countdown-item {
             background: white;
             border: 1px solid rgba(96, 0, 0, 0.2);
@@ -215,12 +197,8 @@
 </head>
 <body>
 
-    <!-- Canvas dedicado para el Confeti para evitar errores de renderizado dinámico -->
-    <canvas id="confetti-canvas" style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999;"></canvas>
-
-    <div id="checkin-alert" class="font-serif-elegant font-bold uppercase text-xs tracking-widest text-center">
-        ✨ ¡Bienvenido! Acceso Confirmado ✨
-    </div>
+    <!-- Canvas dedicado y configurado sin WebWorkers para evitar el error de blob -->
+    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999;"></canvas>
 
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
@@ -303,22 +281,36 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top lg:col-span-2">
-                    <p class="font-script vino-name text-3xl mt-4 mb-2 italic text-center">La melodía de nuestro amor</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 text-center">
+                <div class="photo-card reveal lg:col-span-2 flex flex-col h-full" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
+                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-64 md:h-80 object-cover object-top">
+                    <div class="flex-grow flex items-center justify-center p-2">
+                        <p class="font-script vino-name text-3xl md:text-4xl mt-2 mb-1 italic text-center">La melodía de nuestro amor</p>
+                    </div>
                 </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 object-cover">
+                <div class="photo-card reveal flex flex-col h-full" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg" alt="Chapala" class="w-full h-64 md:h-80 object-cover">
+                    <div class="flex-grow flex items-center justify-center p-2">
+                        <p class="font-script vino-name text-2xl mt-2 mb-1 italic text-center">Rinconcito de Amor</p>
+                    </div>
                 </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 object-cover">
+                <div class="photo-card reveal flex flex-col h-full" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg', 'Soporte Mutuo', 'Medio siglo de ser el sustento del otro.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (2).jpeg" alt="Retrato" class="w-full h-64 md:h-80 object-cover">
+                    <div class="flex-grow flex items-center justify-center p-2">
+                        <p class="font-script vino-name text-2xl mt-2 mb-1 italic text-center">Soporte Mutuo</p>
+                    </div>
                 </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 object-cover">
+                <div class="photo-card reveal lg:col-span-2 flex flex-col h-full" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg', 'Brindis Eterno', 'Por las risas en la mesa y por la bendición de estar juntos.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM.jpeg" alt="Cena 1" class="w-full h-64 md:h-80 object-cover">
+                    <div class="flex-grow flex items-center justify-center p-2">
+                        <p class="font-script vino-name text-3xl mt-2 mb-1 italic text-center">Brindis Eterno</p>
+                    </div>
                 </div>
-                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos sigue siendo el mismo.')">
-                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg" alt="Cena 2" class="w-full h-64 object-cover">
+                <div class="photo-card reveal lg:col-span-2 flex flex-col h-full" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg', 'Eternos Enamorados', 'El brillo en nuestros ojos sigue siendo el mismo.')">
+                    <img src="WhatsApp Image 2026-03-14 at 12.54.27 PM (1).jpeg" alt="Cena 2" class="w-full h-64 md:h-80 object-cover">
+                    <div class="flex-grow flex items-center justify-center p-2">
+                        <p class="font-script vino-name text-3xl mt-2 mb-1 italic text-center">Eternos Enamorados</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -375,7 +367,7 @@
                 <div class="ticket-divider"></div>
                 <div class="flex flex-col items-center gap-4 py-4 mx-auto">
                     <img id="qr-code-img" src="" alt="QR" class="border-8 border-white shadow-xl w-40 h-40">
-                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Escanea al llegar para registrar tu entrada</p>
+                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Código de Seguridad Único</p>
                 </div>
             </div>
             <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase text-gray-400 text-center mx-auto block">Regresar</button>
@@ -406,20 +398,16 @@
     <script>
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
         
-        // Instancia segura de confeti sobre un canvas fijo para evitar errores
-        const confettiCanvas = document.getElementById('confetti-canvas');
-        const safeConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
+        let customConfetti;
 
         function initApp() {
             const urlParams = new URLSearchParams(window.location.search);
             const nombreParam = urlParams.get('nombre') || "Invitado Especial";
-            const modoRegistro = urlParams.get('checkin') === 'true';
 
             // Limpieza y codificación de URL
             let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
-            let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
 
-            // Personalización UI segura
+            // Personalización UI
             const hName = document.getElementById('guest-name-header');
             const tName = document.getElementById('guest-name-ticket');
             const cName = document.getElementById('guest-name-confirm');
@@ -430,42 +418,20 @@
             if(cName) cName.innerText = `¡${nombreLimpio}, te esperamos!`;
             if(sText) sText.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-            // Generar QR de Check-in apuntando de regreso a esta misma página pero con checkin=true
-            const baseUrl = window.location.origin + window.location.pathname;
+            // Generar QR
             const elQR = document.getElementById('qr-code-img');
             if (elQR) {
-                const checkinUrl = `${baseUrl}?nombre=${nombreParaURL}&checkin=true`;
-                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
+                const qrData = encodeURIComponent(`Pase de Acceso para ${nombreLimpio} - Bodas de Oro Fede y Jovita`);
+                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${qrData}`;
             }
 
-            // --- Enviar respuesta oculta a Google Forms ---
-            if (modoRegistro) {
-                // ID del formulario de Google Docs (extraído de tu enlace)
-                const formId = "1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q";
-                const urlForm = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
-                
-                const formData = new URLSearchParams();
-                
-                // NOTA: Para que el nombre se guarde correctamente en el Google Form,
-                // necesitas reemplazar "entry.123456789" con el ID real de la pregunta de nombre en tu formulario.
-                formData.append("entry.123456789", nombreLimpio); 
-
-                fetch(urlForm, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: formData.toString()
-                }).then(() => {
-                    const alertBox = document.getElementById('checkin-alert');
-                    if(alertBox) {
-                        alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Acceso Registrado. ✨`;
-                        alertBox.style.display = 'block';
-                        safeConfetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
-                        setTimeout(() => { alertBox.style.display = 'none'; }, 6000);
-                    }
-                }).catch(err => console.error("Error registrando", err));
+            // Inicializar confeti seguro sin Web Workers (Evita el error 'blob')
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            if (confettiCanvas && typeof confetti === 'function') {
+                customConfetti = confetti.create(confettiCanvas, { 
+                    resize: true, 
+                    useWorker: false 
+                });
             }
         }
 
@@ -493,18 +459,20 @@
             setInterval(updateCountdown, 1000);
             updateCountdown();
 
-            // Confeti de bienvenida
-            setTimeout(() => {
-                const end = Date.now() + 3000;
-                const colors = ['#bf953f', '#fcf6ba', '#b38728'];
-                (function frame() {
-                    safeConfetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
-                    safeConfetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
-                    if (Date.now() < end) requestAnimationFrame(frame);
-                }());
-            }, 800);
+            // Confeti inicial
+            if (customConfetti) {
+                setTimeout(() => {
+                    const end = Date.now() + 3000;
+                    const colors = ['#bf953f', '#fcf6ba', '#b38728'];
+                    (function frame() {
+                        customConfetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
+                        customConfetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
+                        if (Date.now() < end) requestAnimationFrame(frame);
+                    }());
+                }, 800);
+            }
 
-            // Observer para scroll animaciones
+            // Animaciones Scroll
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -521,6 +489,7 @@
             }
         });
 
+        // Audio
         const audio = document.getElementById('bg-audio');
         let audioIniciado = false;
         window.toggleMusic = () => { 
@@ -543,11 +512,20 @@
             } 
         }, { once: true });
 
-        // Globales para UI
+        // Modales globales
         window.openBoleto = () => { const m = document.getElementById('modalBoleto'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; };
         window.closeBoleto = () => { const m = document.getElementById('modalBoleto'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
-        window.openRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; safeConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
+        
+        window.openRegalos = () => { 
+            const m = document.getElementById('modalRegalos'); 
+            if(m) m.style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
+            if (customConfetti) {
+                customConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); 
+            }
+        };
         window.closeRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
+        
         window.openStory = (img, title, content) => {
             const im = document.getElementById('storyImg');
             const ti = document.getElementById('storyTitle');
