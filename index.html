@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
     
-    <!-- Etiquetas Meta para Miniatura en el Link (WhatsApp/Redes Sociales) -->
+    <!-- Etiquetas Meta para Miniatura en el Link -->
     <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
-    <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio el 31 de mayo de 2026.">
+    <meta property="og:description" content="Acompáñanos a celebrar nuestros 50 años de matrimonio el 31 de mayo de 2026.">
     <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
     <meta property="og:url" content="https://fede-y-jovita.github.io">
     <meta property="og:type" content="website">
@@ -62,7 +62,11 @@
             border: 2px solid white;
             box-shadow: 0 10px 30px rgba(96, 0, 0, 0.3);
             cursor: pointer;
-            touch-action: manipulation;
+            padding: 1.25rem 2.5rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
         }
 
         .primary-btn:hover { transform: translateY(-3px); background-color: var(--vino-soft); }
@@ -156,7 +160,13 @@
             border: 2px solid white;
         }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        /* Animación Reveal - Fix para getBoundingClientRect error */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+            will-change: transform, opacity;
+        }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .vino-name { color: var(--vino); font-weight: bold; }
@@ -215,12 +225,10 @@
 </head>
 <body>
 
-    <!-- Notificación de Check-in -->
-    <div id="checkin-alert" class="font-serif-elegant font-bold uppercase text-xs tracking-widest">
+    <div id="checkin-alert" class="font-serif-elegant font-bold uppercase text-xs tracking-widest text-center">
         ✨ ¡Bienvenido! Acceso Confirmado ✨
     </div>
 
-    <!-- Control de Música -->
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
             <span id="music-icon" style="font-size: 26px;">🎵</span>
@@ -228,7 +236,6 @@
     </div>
     <audio id="bg-audio" src="ytmp3free.cc_novia-mia-remastered-youtubemp3free.org.mp3" loop preload="auto"></audio>
 
-    <!-- Portada -->
     <header class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
         <div class="absolute inset-0 z-0">
              <img src="WhatsApp Image 2026-03-11 at 11.36.03 AM.jpeg" alt="Fede & Jovita Palmeras" class="w-full h-full object-cover opacity-60">
@@ -241,21 +248,20 @@
             </div>
             
             <h1 class="font-serif-elegant text-6xl md:text-9xl mb-4 vino-name tracking-tighter">Fede & Jovita</h1>
-            <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor incondicional</p>
+            <p class="font-script vino-name text-4xl md:text-7xl mb-12 text-center">50 años de amor incondicional</p>
             
-            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12 text-center">
+            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12 text-center mx-auto">
                 <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
                 <p id="guest-name-header" class="font-serif-elegant text-2xl md:text-4xl vino-name">Invitado especial</p>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#historia" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Nuestra Historia</a>
-                <button onclick="openBoleto()" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg bg-yellow-700">Ver mis Pases 🎫</button>
+                <a href="#historia" class="primary-btn">Nuestra Historia</a>
+                <button onclick="openBoleto()" class="primary-btn bg-yellow-700">Ver mis Pases 🎫</button>
             </div>
         </div>
     </header>
 
-    <!-- Contador de Tiempo (Configurado al 31 de Mayo) -->
     <section class="py-20 bg-white text-center reveal border-y border-red-900/5">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <p class="font-serif-elegant text-[13px] tracking-[0.8em] mb-12 uppercase font-bold vino-name">Faltan solo...</p>
@@ -277,30 +283,29 @@
                     <span class="text-[9px] uppercase tracking-widest mt-2 text-gray-400 font-bold">Segundos</span>
                 </div>
             </div>
-            <p class="mt-12 font-serif-elegant text-xl vino-name tracking-widest font-bold">31 DE MAYO DEL 2026</p>
+            <p class="mt-12 font-serif-elegant text-xl vino-name tracking-widest font-bold uppercase">31 de mayo de 2026</p>
         </div>
     </section>
 
-    <!-- Historia y Galería -->
     <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-b border-red-900/10">
         <div class="max-w-6xl mx-auto relative z-10">
             <p class="font-script vino-name text-7xl mb-4 text-center">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
             <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'El comienzo de una vida compartida. Aquel día nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
-                <img src="Captura de pantalla 2026-03-15 172233.png" alt="Boda Fede y Jovita Principal" class="main-wedding-img">
+                <img src="Captura de pantalla 2026-03-15 172233.png" alt="Boda Principal" class="main-wedding-img">
                 <div class="mt-8 text-center">
-                    <p class="font-script vino-name text-5xl mb-4 italic">Donde nuestro 'sí' comenzó</p>
+                    <p class="font-script vino-name text-5xl mb-4 italic text-center">Donde nuestro 'sí' comenzó</p>
                     <div class="bg-vino text-white text-[11px] py-3 px-12 uppercase tracking-widest font-bold inline-block rounded-full shadow-lg">Leer historia completa</div>
                 </div>
             </div>
 
-            <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24 reveal">
-                <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase text-center md:text-left">Medio Siglo de Bendiciones</h3>
+            <div class="text-left bg-white/70 p-12 rounded-xl border border-red-900/20 backdrop-blur-md shadow-2xl mb-24 reveal mx-auto">
+                <h3 class="font-serif-elegant text-4xl vino-name mb-8 uppercase text-center md:text-left text-center">Medio Siglo de Bendiciones</h3>
                 <p id="guest-text-story" class="text-gray-700 font-light leading-relaxed text-xl italic mb-8 border-l-4 border-red-900/30 pl-6">
                     Querido invitado, queremos compartir contigo los momentos que forjaron este camino de amor.
                 </p>
-                <p class="text-gray-600 font-light leading-loose text-lg text-center md:text-left">
+                <p class="text-gray-600 font-light leading-loose text-lg text-center md:text-left text-center">
                     Fede y Jovita son el ejemplo vivo de que el amor se construye con paciencia, fe y mucha alegría compartida en familia.
                 </p>
             </div>
@@ -326,8 +331,7 @@
         </div>
     </section>
 
-    <!-- Panel Admin -->
-    <section id="admin-panel" class="reveal px-6 text-center">
+    <section id="admin-panel" class="reveal px-6 text-center mx-auto">
         <h3 class="font-serif-elegant text-2xl vino-name mb-8 uppercase font-bold text-center">Registro de Entradas (Admin)</h3>
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -342,45 +346,41 @@
         </div>
     </section>
 
-    <!-- Regalos -->
     <section id="regalos" class="py-24 px-6 bg-white text-center reveal border-y border-red-900/5">
-        <div class="max-w-2xl mx-auto">
+        <div class="max-w-2xl mx-auto text-center">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest text-center">Mesa de Regalos</h3>
             <p class="text-gray-500 mb-12 italic text-center text-lg">Su presencia es nuestro mayor regalo.</p>
-            <button onclick="openRegalos()" class="primary-btn px-16 py-6 rounded-full text-[12px] uppercase tracking-widest shadow-2xl">Ver Mesa Digital 🎊</button>
+            <button onclick="openRegalos()" class="primary-btn mx-auto block">Ver Mesa Digital 🎊</button>
         </div>
     </section>
 
-    <!-- Itinerario -->
     <section id="itinerario" class="py-24 px-6 bg-[#f7e8e8] reveal border-b border-red-900/10 text-center">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-            <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
-                <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">MISA DE ACCIÓN DE GRACIAS</h4>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 text-center">
+            <div class="bg-white p-12 border-t-8 border-vino shadow-2xl text-center">
+                <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase text-center">MISA DE ACCIÓN DE GRACIAS</h4>
                 <p class="vino-name font-bold text-5xl mb-6 text-center">15:00 HRS</p>
-                <button onclick="window.open('https://share.google/dgMPErrRtKefO1r9T', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px]">Ver Iglesia</button>
+                <button onclick="window.open('https://share.google/dgMPErrRtKefO1r9T', '_blank')" class="primary-btn mx-auto block">Ver Iglesia</button>
             </div>
-            <div class="bg-white p-12 border-t-8 border-vino shadow-2xl">
-                <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase">SALÓN EL CORONADO</h4>
+            <div class="bg-white p-12 border-t-8 border-vino shadow-2xl text-center">
+                <h4 class="font-serif-elegant text-3xl text-gray-800 mb-8 uppercase text-center">SALÓN EL CORONADO</h4>
                 <p class="vino-name font-bold text-5xl mb-6 text-center">16:00 HRS</p>
-                <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn px-10 py-4 rounded-full text-[10px]">Ver Mapa</button>
+                <button onclick="window.open('https://www.google.com/maps/search/Salon+El+Coronado+Tlalnepantla', '_blank')" class="primary-btn mx-auto block">Ver Mapa</button>
             </div>
         </div>
     </section>
 
-    <!-- Asistencia -->
     <section class="py-32 bg-white text-center px-6 reveal">
         <div class="max-w-xl mx-auto text-center">
-            <h2 class="font-serif-elegant text-5xl mb-8 vino-name uppercase">Asistencia</h2>
-            <div class="flex flex-col gap-6 items-center">
+            <h2 class="font-serif-elegant text-5xl mb-8 vino-name uppercase text-center">Asistencia</h2>
+            <div class="flex flex-col gap-6 items-center mx-auto">
                 <p id="guest-name-confirm" class="text-gray-600 text-lg mb-4 italic text-center">¡Te esperamos!</p>
-                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full text-xs tracking-[0.3em] w-full max-w-sm shadow-2xl uppercase">Confirmar Asistencia</button>
-                <button onclick="openBoleto()" class="primary-btn px-16 py-6 rounded-full text-xs tracking-[0.3em] bg-yellow-700 w-full max-w-sm shadow-2xl uppercase font-bold">Ver mis Pases 🎫</button>
+                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn w-full max-w-sm shadow-2xl">Confirmar Asistencia</button>
+                <button onclick="openBoleto()" class="primary-btn bg-yellow-700 w-full max-w-sm shadow-2xl text-center">Ver mis Pases 🎫</button>
             </div>
             <div class="mt-24 opacity-60 text-[12px] tracking-[1.5em] uppercase vino-name font-bold text-center">Vestimenta: Gala</div>
         </div>
     </section>
 
-    <!-- Modal Boletos -->
     <div id="modalBoleto" class="modal-overlay" onclick="closeBoleto()">
         <div class="modal-content p-8 sm:p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeBoleto()">&times;</div>
@@ -388,27 +388,26 @@
             <div class="ticket shadow-2xl">
                 <div class="flex justify-between items-center mb-6">
                     <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Bodas de Oro</span>
-                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">31.05.2026</span>
+                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400 text-center">31.05.2026</span>
                 </div>
                 <h4 class="font-serif-elegant text-3xl mb-2 vino-name text-center">Fede & Jovita</h4>
                 <div class="ticket-divider"></div>
                 <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center">Pase exclusivo para:</p>
                 <p id="guest-name-ticket" class="font-serif-elegant text-2xl vino-name mb-4 text-center">Invitado especial</p>
                 <div class="ticket-divider"></div>
-                <div class="flex flex-col items-center gap-4 py-4">
+                <div class="flex flex-col items-center gap-4 py-4 mx-auto">
                     <img id="qr-code-img" src="" alt="QR" class="border-8 border-white shadow-xl w-40 h-40">
                     <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Escanea al llegar para registrar tu entrada</p>
                 </div>
             </div>
-            <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase text-gray-400 text-center">Regresar</button>
+            <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase text-gray-400 text-center mx-auto block">Regresar</button>
         </div>
     </div>
 
-    <!-- Modales de Historia -->
     <div id="modalStory" class="modal-overlay" onclick="closeStory()">
         <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeStory()">&times;</div>
-            <img id="storyImg" src="" class="w-full h-72 object-cover mb-8 shadow-lg" alt="Foto">
+            <img id="storyImg" src="" class="w-full h-72 object-cover mb-8 shadow-lg mx-auto" alt="Foto">
             <h4 id="storyTitle" class="font-serif-elegant text-3xl vino-name mb-6 text-center uppercase"></h4>
             <p id="storyContent" class="text-gray-700 leading-loose text-xl italic px-4 text-center"></p>
         </div>
@@ -418,91 +417,98 @@
         <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeRegalos()">&times;</div>
             <h3 class="font-serif-elegant text-4xl vino-name mb-12 uppercase text-center font-bold">Mesa Digital</h3>
-            <div class="p-10 border border-red-100 bg-red-50/20 rounded shadow-sm text-center">
-                <p class="font-bold vino-name uppercase text-lg">Liverpool</p>
-                <p class="text-2xl text-gray-700 font-bold">50921432</p>
+            <div class="p-10 border border-red-100 bg-red-50/20 rounded shadow-sm text-center mx-auto max-w-md">
+                <p class="font-bold vino-name uppercase text-lg text-center">Liverpool</p>
+                <p class="text-2xl text-gray-700 font-bold text-center">50921432</p>
             </div>
-            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400 text-center">Cerrar</button>
+            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase text-gray-400 tracking-widest text-center mx-auto block">Cerrar Ventana</button>
         </div>
     </div>
 
-    <!-- Lógica Principal -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Configuración Firebase (inyectada por entorno)
+        // Configuración segura
         const firebaseConfig = JSON.parse(__firebase_config);
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'fede-jovita-50';
 
-        // Fecha del evento: 31 de Mayo 2026
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
 
         async function initApp() {
-            await signInAnonymously(auth);
+            try {
+                await signInAnonymously(auth);
+                const urlParams = new URLSearchParams(window.location.search);
+                const nombreParam = urlParams.get('nombre') || "Invitado Especial";
+                const modoRegistro = urlParams.get('checkin') === 'true';
+                const esAdmin = urlParams.get('admin') === 'true';
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const nombreParam = urlParams.get('nombre') || "Invitado Especial";
-            const modoRegistro = urlParams.get('checkin') === 'true';
-            const esAdmin = urlParams.get('admin') === 'true';
+                let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
+                let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
 
-            let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
-            let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
+                // Personalización UI segura
+                const hName = document.getElementById('guest-name-header');
+                const tName = document.getElementById('guest-name-ticket');
+                const cName = document.getElementById('guest-name-confirm');
+                const sText = document.getElementById('guest-text-story');
 
-            // Personalización UI
-            document.getElementById('guest-name-header').innerText = nombreLimpio;
-            document.getElementById('guest-name-ticket').innerText = nombreLimpio;
-            document.getElementById('guest-name-confirm').innerText = `¡${nombreLimpio}, te esperamos!`;
-            document.getElementById('guest-text-story').innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
+                if(hName) hName.innerText = nombreLimpio;
+                if(tName) tName.innerText = nombreLimpio;
+                if(cName) cName.innerText = `¡${nombreLimpio}, te esperamos!`;
+                if(sText) sText.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-            // Generar QR de Check-in
-            const baseUrl = window.location.origin + window.location.pathname;
-            const elQR = document.getElementById('qr-code-img');
-            if (elQR) {
-                const checkinUrl = `${baseUrl}?nombre=${nombreParaURL}&checkin=true`;
-                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
-            }
+                // Generar QR
+                const baseUrl = window.location.origin + window.location.pathname;
+                const elQR = document.getElementById('qr-code-img');
+                if (elQR) {
+                    const checkinUrl = `${baseUrl}?nombre=${nombreParaURL}&checkin=true`;
+                    elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
+                }
 
-            // Registro automático si viene de QR
-            if (modoRegistro) {
-                try {
+                // Check-in
+                if (modoRegistro) {
                     await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'), {
                         invitado: nombreLimpio,
                         fecha: serverTimestamp()
                     });
                     const alertBox = document.getElementById('checkin-alert');
-                    alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Acceso Registrado. ✨`;
-                    alertBox.style.display = 'block';
-                    confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
-                    setTimeout(() => alertBox.style.display = 'none', 6000);
-                } catch (e) { console.error("Error registro", e); }
-            }
+                    if(alertBox) {
+                        alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Acceso Registrado. ✨`;
+                        alertBox.style.display = 'block';
+                        confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
+                        setTimeout(() => { alertBox.style.display = 'none'; }, 6000);
+                    }
+                }
 
-            // Panel Admin
-            if (esAdmin) {
-                const adminSection = document.getElementById('admin-panel');
-                adminSection.style.display = 'block';
-                try {
-                    const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'));
-                    const list = document.getElementById('checkin-list');
-                    const data = [];
-                    querySnapshot.forEach(doc => data.push(doc.data()));
-                    data.sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
-                    list.innerHTML = data.map(item => `
-                        <tr>
-                            <td class="p-4 border font-bold">${item.invitado}</td>
-                            <td class="p-4 border text-gray-500">${item.fecha ? new Date(item.fecha.seconds * 1000).toLocaleString() : 'Reciente'}</td>
-                        </tr>
-                    `).join('');
-                } catch (e) { console.error("Error admin", e); }
+                // Panel Admin
+                if (esAdmin) {
+                    const adminSection = document.getElementById('admin-panel');
+                    if(adminSection) {
+                        adminSection.style.display = 'block';
+                        const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'));
+                        const list = document.getElementById('checkin-list');
+                        if(list) {
+                            const data = [];
+                            querySnapshot.forEach(doc => data.push(doc.data()));
+                            data.sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
+                            list.innerHTML = data.map(item => `
+                                <tr>
+                                    <td class="p-4 border font-bold">${item.invitado}</td>
+                                    <td class="p-4 border text-gray-500">${item.fecha ? new Date(item.fecha.seconds * 1000).toLocaleString() : 'Reciente'}</td>
+                                </tr>
+                            `).join('');
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error("Firebase Error:", e);
             }
         }
 
-        // Lógica del Contador
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = eventDate - now;
@@ -511,10 +517,15 @@
             const m = Math.max(0, Math.floor((distance % 3600000) / 60000));
             const s = Math.max(0, Math.floor((distance % 60000) / 1000));
 
-            document.getElementById("days").innerText = d.toString().padStart(2, '0');
-            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+            const dEl = document.getElementById("days");
+            const hEl = document.getElementById("hours");
+            const mEl = document.getElementById("minutes");
+            const sEl = document.getElementById("seconds");
+
+            if(dEl) dEl.innerText = d.toString().padStart(2, '0');
+            if(hEl) hEl.innerText = h.toString().padStart(2, '0');
+            if(mEl) mEl.innerText = m.toString().padStart(2, '0');
+            if(sEl) sEl.innerText = s.toString().padStart(2, '0');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -524,50 +535,71 @@
 
             // Confeti de bienvenida
             setTimeout(() => {
-                var end = Date.now() + 3000;
-                var colors = ['#bf953f', '#fcf6ba', '#b38728'];
+                const end = Date.now() + 3000;
+                const colors = ['#bf953f', '#fcf6ba', '#b38728'];
                 (function frame() {
-                    confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
-                    confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                    confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
+                    confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
                     if (Date.now() < end) requestAnimationFrame(frame);
                 }());
             }, 800);
 
-            // Animaciones de Scroll
+            // Observer para scroll animaciones
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+                            entry.target.classList.add('active');
+                        }
+                    });
                 }, { threshold: 0.1 });
-                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (el instanceof HTMLElement) observer.observe(el);
+                });
             } else {
                 document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
             }
         });
 
-        // Música
         const audio = document.getElementById('bg-audio');
         let audioIniciado = false;
         window.toggleMusic = () => { 
-            if (audio.paused) { audio.play(); document.getElementById('music-icon').innerText = '🎵'; } 
-            else { audio.pause(); document.getElementById('music-icon').innerText = '🔇'; } 
+            if (audio.paused) { 
+                if(!audioIniciado) { audio.currentTime = 21; audioIniciado = true; }
+                audio.play(); 
+                const icon = document.getElementById('music-icon');
+                if(icon) icon.innerText = '🎵'; 
+            } else { 
+                audio.pause(); 
+                const icon = document.getElementById('music-icon');
+                if(icon) icon.innerText = '🔇'; 
+            } 
         };
         document.addEventListener('click', () => { 
-            if (audio.paused && !audioIniciado) { audio.currentTime = 21; audio.play(); audioIniciado = true; } 
+            if (audio && audio.paused && !audioIniciado) { 
+                audio.currentTime = 21; 
+                audio.play().catch(()=>{}); 
+                audioIniciado = true; 
+            } 
         }, { once: true });
 
         // Globales para UI
-        window.openBoleto = () => { document.getElementById('modalBoleto').style.display = 'flex'; document.body.style.overflow = 'hidden'; };
-        window.closeBoleto = () => { document.getElementById('modalBoleto').style.display = 'none'; document.body.style.overflow = 'auto'; };
-        window.openRegalos = () => { document.getElementById('modalRegalos').style.display = 'flex'; document.body.style.overflow = 'hidden'; confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
-        window.closeRegalos = () => { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; };
+        window.openBoleto = () => { const m = document.getElementById('modalBoleto'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; };
+        window.closeBoleto = () => { const m = document.getElementById('modalBoleto'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
+        window.openRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
+        window.closeRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
         window.openStory = (img, title, content) => {
-            document.getElementById('storyImg').src = img;
-            document.getElementById('storyTitle').innerText = title;
-            document.getElementById('storyContent').innerText = content;
-            document.getElementById('modalStory').style.display = 'flex';
+            const im = document.getElementById('storyImg');
+            const ti = document.getElementById('storyTitle');
+            const co = document.getElementById('storyContent');
+            const mo = document.getElementById('modalStory');
+            if(im) im.src = img;
+            if(ti) ti.innerText = title;
+            if(co) co.innerText = content;
+            if(mo) mo.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         };
-        window.closeStory = () => { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; };
+        window.closeStory = () => { const m = document.getElementById('modalStory'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
     </script>
 </body>
 </html>
