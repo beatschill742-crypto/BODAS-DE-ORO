@@ -77,7 +77,6 @@
             box-shadow: 0 20px 45px rgba(0,0,0,0.15);
         }
 
-        /* Estilo de Boleto Digital */
         .ticket {
             position: relative;
             background: white;
@@ -460,7 +459,7 @@
             document.getElementById('guest-name-confirm').innerText = `¡${nombreLimpio}, te esperamos!`;
             document.getElementById('guest-text-story').innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-            // Generar QR de Check-in (May 31)
+            // Generar QR de Check-in
             const baseUrl = window.location.origin + window.location.pathname;
             const elQR = document.getElementById('qr-code-img');
             if (elQR) {
@@ -503,7 +502,7 @@
             }
         }
 
-        // Lógica del Contador para el 31 de Mayo
+        // Lógica del Contador
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = eventDate - now;
@@ -563,4 +562,12 @@
         window.closeRegalos = () => { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; };
         window.openStory = (img, title, content) => {
             document.getElementById('storyImg').src = img;
-          
+            document.getElementById('storyTitle').innerText = title;
+            document.getElementById('storyContent').innerText = content;
+            document.getElementById('modalStory').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeStory = () => { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; };
+    </script>
+</body>
+</html>
