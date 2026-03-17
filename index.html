@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
     
-    <!-- Etiquetas Meta para Miniatura en el Link -->
+    <!-- Etiquetas Meta para Miniatura en el Link (WhatsApp/Redes Sociales) -->
     <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
-    <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio el 21 de mayo de 2026.">
+    <meta property="og:description" content="Te invitamos a celebrar nuestros 50 años de matrimonio el 31 de mayo de 2026.">
     <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
     <meta property="og:url" content="https://fede-y-jovita.github.io">
     <meta property="og:type" content="website">
@@ -34,7 +34,7 @@
             overflow-x: hidden;
             letter-spacing: 0.05em;
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10z' fill='%23600000' fill-opacity='0.03'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10z' fill='%23600000' fill-opacity='0.02'/%3E%3C/svg%3E"),
                 linear-gradient(to bottom, transparent, rgba(96, 0, 0, 0.05));
         }
 
@@ -47,9 +47,9 @@
             -webkit-text-fill-color: transparent;
             font-weight: 700;
             display: inline-block;
-            font-size: clamp(3.5rem, 12vw, 8rem);
-            line-height: 1;
-            margin-bottom: 2.5rem;
+            font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
             text-transform: uppercase;
         }
@@ -77,6 +77,7 @@
             box-shadow: 0 20px 45px rgba(0,0,0,0.15);
         }
 
+        /* Estilo de Boleto Digital */
         .ticket {
             position: relative;
             background: white;
@@ -103,6 +104,16 @@
         .ticket::after { right: -18px; }
 
         .ticket-divider { border-top: 2px dashed var(--vino); margin: 2rem 0; opacity: 0.2; }
+
+        .photo-card {
+            padding: 12px;
+            background: white;
+            border: 1px solid rgba(96, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
 
         .modal-overlay {
             display: none;
@@ -177,7 +188,6 @@
 
         @keyframes slideDown { from { transform: translate(-50%, -100%); } to { transform: translate(-50%, 0); } }
 
-        /* Estilos del Contador */
         .countdown-item {
             background: white;
             border: 1px solid rgba(96, 0, 0, 0.2);
@@ -193,7 +203,6 @@
             line-height: 1;
         }
 
-        /* Estilos del Panel Admin */
         #admin-panel {
             display: none;
             background: white;
@@ -203,24 +212,16 @@
             border: 4px double var(--vino);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-
-        .photo-card {
-            padding: 12px;
-            background: white;
-            border: 1px solid rgba(96, 0, 0, 0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-        }
     </style>
 </head>
 <body>
 
+    <!-- Notificación de Check-in -->
     <div id="checkin-alert" class="font-serif-elegant font-bold uppercase text-xs tracking-widest">
         ✨ ¡Bienvenido! Acceso Confirmado ✨
     </div>
 
+    <!-- Control de Música -->
     <div id="music-control">
         <div class="music-toggle" onclick="toggleMusic()">
             <span id="music-icon" style="font-size: 26px;">🎵</span>
@@ -243,21 +244,21 @@
             <h1 class="font-serif-elegant text-6xl md:text-9xl mb-4 vino-name tracking-tighter">Fede & Jovita</h1>
             <p class="font-script vino-name text-4xl md:text-7xl mb-12">50 años de amor incondicional</p>
             
-            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12">
-                <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold text-center">Invitados de Honor:</p>
-                <p id="guest-name-header" class="font-serif-elegant text-2xl md:text-4xl vino-name text-center">Invitado especial</p>
+            <div class="bg-white/95 border-l-8 border-[#600000] p-8 rounded-r-lg inline-block reveal active shadow-2xl mb-12 text-center">
+                <p class="text-[11px] uppercase tracking-[0.4em] text-gray-500 mb-2 font-bold">Invitados de Honor:</p>
+                <p id="guest-name-header" class="font-serif-elegant text-2xl md:text-4xl vino-name">Invitado especial</p>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#historia" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg">Nuestra Historia</a>
-                <button onclick="openBoleto()" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg bg-yellow-700">Ver mis Boletos 🎫</button>
+                <button onclick="openBoleto()" class="primary-btn px-10 py-5 rounded-full tracking-[0.4em] text-[10px] uppercase inline-block shadow-lg bg-yellow-700">Ver mis Pases 🎫</button>
             </div>
         </div>
     </header>
 
-    <!-- Contador de Tiempo -->
+    <!-- Contador de Tiempo (Configurado al 31 de Mayo) -->
     <section class="py-20 bg-white text-center reveal border-y border-red-900/5">
-        <div class="max-w-4xl mx-auto px-4">
+        <div class="max-w-4xl mx-auto px-4 text-center">
             <p class="font-serif-elegant text-[13px] tracking-[0.8em] mb-12 uppercase font-bold vino-name">Faltan solo...</p>
             <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8">
                 <div class="countdown-item flex flex-col items-center">
@@ -277,17 +278,17 @@
                     <span class="text-[9px] uppercase tracking-widest mt-2 text-gray-400 font-bold">Segundos</span>
                 </div>
             </div>
-            <p class="mt-12 font-serif-elegant text-xl vino-name tracking-widest font-bold">21 DE MAYO DEL 2026</p>
+            <p class="mt-12 font-serif-elegant text-xl vino-name tracking-widest font-bold">31 DE MAYO DEL 2026</p>
         </div>
     </section>
 
-    <!-- Historia -->
+    <!-- Historia y Galería -->
     <section id="historia" class="relative py-32 bg-[#fffcf9] text-center px-6 reveal overflow-hidden border-b border-red-900/10">
         <div class="max-w-6xl mx-auto relative z-10">
             <p class="font-script vino-name text-7xl mb-4 text-center">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
-            <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'Aquel día nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
+            <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'El comienzo de una vida compartida. Aquel día nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
                 <img src="Captura de pantalla 2026-03-15 172233.png" alt="Boda Fede y Jovita Principal" class="main-wedding-img">
                 <div class="mt-8 text-center">
                     <p class="font-script vino-name text-5xl mb-4 italic">Donde nuestro 'sí' comenzó</p>
@@ -305,7 +306,6 @@
                 </p>
             </div>
 
-            <!-- Galería de Recuerdos -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
                 <div class="photo-card lg:col-span-2 reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
                     <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
@@ -327,9 +327,9 @@
         </div>
     </section>
 
-    <!-- Panel de Administrador (Oculto por defecto) -->
-    <section id="admin-panel" class="reveal px-6">
-        <h3 class="font-serif-elegant text-2xl vino-name mb-8 uppercase text-center font-bold">Registro de Entradas (Admin)</h3>
+    <!-- Panel Admin -->
+    <section id="admin-panel" class="reveal px-6 text-center">
+        <h3 class="font-serif-elegant text-2xl vino-name mb-8 uppercase font-bold text-center">Registro de Entradas (Admin)</h3>
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -343,7 +343,7 @@
         </div>
     </section>
 
-    <!-- Mesa de Regalos -->
+    <!-- Regalos -->
     <section id="regalos" class="py-24 px-6 bg-white text-center reveal border-y border-red-900/5">
         <div class="max-w-2xl mx-auto">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest text-center">Mesa de Regalos</h3>
@@ -370,8 +370,8 @@
 
     <!-- Asistencia -->
     <section class="py-32 bg-white text-center px-6 reveal">
-        <div class="max-w-xl mx-auto">
-            <h2 class="font-serif-elegant text-5xl mb-8 vino-name uppercase text-center">Asistencia</h2>
+        <div class="max-w-xl mx-auto text-center">
+            <h2 class="font-serif-elegant text-5xl mb-8 vino-name uppercase">Asistencia</h2>
             <div class="flex flex-col gap-6 items-center">
                 <p id="guest-name-confirm" class="text-gray-600 text-lg mb-4 italic text-center">¡Te esperamos!</p>
                 <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn px-16 py-8 rounded-full text-xs tracking-[0.3em] w-full max-w-sm shadow-2xl uppercase">Confirmar Asistencia</button>
@@ -389,7 +389,7 @@
             <div class="ticket shadow-2xl">
                 <div class="flex justify-between items-center mb-6">
                     <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Bodas de Oro</span>
-                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">21.05.2026</span>
+                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">31.05.2026</span>
                 </div>
                 <h4 class="font-serif-elegant text-3xl mb-2 vino-name text-center">Fede & Jovita</h4>
                 <div class="ticket-divider"></div>
@@ -405,7 +405,7 @@
         </div>
     </div>
 
-    <!-- Modales Adicionales -->
+    <!-- Modales de Historia -->
     <div id="modalStory" class="modal-overlay" onclick="closeStory()">
         <div class="modal-content p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeStory()">&times;</div>
@@ -423,26 +423,29 @@
                 <p class="font-bold vino-name uppercase text-lg">Liverpool</p>
                 <p class="text-2xl text-gray-700 font-bold">50921432</p>
             </div>
-            <button onclick="closeRegalos()" class="mt-12 text-[12px] text-gray-400 uppercase tracking-widest">Cerrar Ventana</button>
+            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase tracking-widest font-bold text-gray-400 text-center">Cerrar</button>
         </div>
     </div>
 
+    <!-- Lógica Principal -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // Configuración Firebase (inyectada por entorno)
         const firebaseConfig = JSON.parse(__firebase_config);
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'fede-jovita-50';
 
-        // Fecha del evento: 21 de Mayo 2026
-        const eventDate = new Date(2026, 4, 21, 15, 0, 0).getTime();
+        // Fecha del evento: 31 de Mayo 2026
+        const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
 
         async function initApp() {
             await signInAnonymously(auth);
+
             const urlParams = new URLSearchParams(window.location.search);
             const nombreParam = urlParams.get('nombre') || "Invitado Especial";
             const modoRegistro = urlParams.get('checkin') === 'true';
@@ -451,13 +454,13 @@
             let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
             let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
 
-            // Personalizar textos
+            // Personalización UI
             document.getElementById('guest-name-header').innerText = nombreLimpio;
             document.getElementById('guest-name-ticket').innerText = nombreLimpio;
             document.getElementById('guest-name-confirm').innerText = `¡${nombreLimpio}, te esperamos!`;
             document.getElementById('guest-text-story').innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-            // Generar QR
+            // Generar QR de Check-in (May 31)
             const baseUrl = window.location.origin + window.location.pathname;
             const elQR = document.getElementById('qr-code-img');
             if (elQR) {
@@ -465,38 +468,42 @@
                 elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
             }
 
-            // Registro
+            // Registro automático si viene de QR
             if (modoRegistro) {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'), {
-                    invitado: nombreLimpio,
-                    fecha: serverTimestamp()
-                });
-                const alertBox = document.getElementById('checkin-alert');
-                alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Entrada Confirmada. ✨`;
-                alertBox.style.display = 'block';
-                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
-                setTimeout(() => alertBox.style.display = 'none', 6000);
+                try {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'), {
+                        invitado: nombreLimpio,
+                        fecha: serverTimestamp()
+                    });
+                    const alertBox = document.getElementById('checkin-alert');
+                    alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Acceso Registrado. ✨`;
+                    alertBox.style.display = 'block';
+                    confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
+                    setTimeout(() => alertBox.style.display = 'none', 6000);
+                } catch (e) { console.error("Error registro", e); }
             }
 
-            // Admin
+            // Panel Admin
             if (esAdmin) {
                 const adminSection = document.getElementById('admin-panel');
                 adminSection.style.display = 'block';
-                const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'));
-                const list = document.getElementById('checkin-list');
-                const data = [];
-                querySnapshot.forEach(doc => data.push(doc.data()));
-                data.sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
-                list.innerHTML = data.map(item => `
-                    <tr>
-                        <td class="p-4 border font-bold">${item.invitado}</td>
-                        <td class="p-4 border text-gray-500">${item.fecha ? new Date(item.fecha.seconds * 1000).toLocaleString() : 'Reciente'}</td>
-                    </tr>
-                `).join('');
+                try {
+                    const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'));
+                    const list = document.getElementById('checkin-list');
+                    const data = [];
+                    querySnapshot.forEach(doc => data.push(doc.data()));
+                    data.sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
+                    list.innerHTML = data.map(item => `
+                        <tr>
+                            <td class="p-4 border font-bold">${item.invitado}</td>
+                            <td class="p-4 border text-gray-500">${item.fecha ? new Date(item.fecha.seconds * 1000).toLocaleString() : 'Reciente'}</td>
+                        </tr>
+                    `).join('');
+                } catch (e) { console.error("Error admin", e); }
             }
         }
 
-        // Lógica del Contador
+        // Lógica del Contador para el 31 de Mayo
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = eventDate - now;
@@ -516,7 +523,7 @@
             setInterval(updateCountdown, 1000);
             updateCountdown();
 
-            // Confeti inicial
+            // Confeti de bienvenida
             setTimeout(() => {
                 var end = Date.now() + 3000;
                 var colors = ['#bf953f', '#fcf6ba', '#b38728'];
@@ -527,14 +534,18 @@
                 }());
             }, 800);
 
-            // Animaciones scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            // Animaciones de Scroll
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            } else {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            }
         });
 
-        // Audio
+        // Música
         const audio = document.getElementById('bg-audio');
         let audioIniciado = false;
         window.toggleMusic = () => { 
@@ -545,19 +556,11 @@
             if (audio.paused && !audioIniciado) { audio.currentTime = 21; audio.play(); audioIniciado = true; } 
         }, { once: true });
 
-        // Modales globales
+        // Globales para UI
         window.openBoleto = () => { document.getElementById('modalBoleto').style.display = 'flex'; document.body.style.overflow = 'hidden'; };
         window.closeBoleto = () => { document.getElementById('modalBoleto').style.display = 'none'; document.body.style.overflow = 'auto'; };
-        window.openRegalos = () => { document.getElementById('modalRegalos').style.display = 'flex'; document.body.style.overflow = 'hidden'; if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
+        window.openRegalos = () => { document.getElementById('modalRegalos').style.display = 'flex'; document.body.style.overflow = 'hidden'; confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
         window.closeRegalos = () => { document.getElementById('modalRegalos').style.display = 'none'; document.body.style.overflow = 'auto'; };
         window.openStory = (img, title, content) => {
             document.getElementById('storyImg').src = img;
-            document.getElementById('storyTitle').innerText = title;
-            document.getElementById('storyContent').innerText = content;
-            document.getElementById('modalStory').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        };
-        window.closeStory = () => { document.getElementById('modalStory').style.display = 'none'; document.body.style.overflow = 'auto'; };
-    </script>
-</body>
-</html>
+          
