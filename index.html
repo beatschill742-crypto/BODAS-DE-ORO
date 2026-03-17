@@ -160,7 +160,7 @@
             border: 2px solid white;
         }
 
-        /* Animación Reveal - Fix para getBoundingClientRect error */
+        /* Animación Reveal */
         .reveal { 
             opacity: 0; 
             transform: translateY(30px); 
@@ -224,6 +224,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Canvas dedicado para el Confeti para evitar errores de renderizado dinámico -->
+    <canvas id="confetti-canvas" style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999;"></canvas>
 
     <div id="checkin-alert" class="font-serif-elegant font-bold uppercase text-xs tracking-widest text-center">
         ✨ ¡Bienvenido! Acceso Confirmado ✨
@@ -311,8 +314,8 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
-                <div class="photo-card lg:col-span-2 reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
-                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top">
+                <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg', 'La Melodía de Nuestro Amor', 'Fede amaba tocar la guitarra... un accidente silenció las cuerdas, pero el apoyo de Jovita se convirtió en la nueva música de nuestras vidas.')">
+                    <img src="WhatsApp Image 2026-03-14 at 2.39.40 PM.jpeg" alt="Fede Guitarra" class="w-full h-96 object-cover object-top lg:col-span-2">
                     <p class="font-script vino-name text-3xl mt-4 mb-2 italic text-center">La melodía de nuestro amor</p>
                 </div>
                 <div class="photo-card reveal" onclick="openStory('WhatsApp Image 2026-03-14 at 12.54.27 PM (3).jpeg', 'Rinconcito de Amor', 'Caminando siempre en la misma dirección.')">
@@ -438,6 +441,10 @@
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'fede-jovita-50';
 
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
+        
+        // Instancia segura de confeti sobre un canvas fijo para evitar errores de redibujado en DOM
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const safeConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
 
         async function initApp() {
             try {
@@ -450,7 +457,7 @@
                 let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
                 let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
 
-                // Personalización UI segura
+                // Personalización UI
                 const hName = document.getElementById('guest-name-header');
                 const tName = document.getElementById('guest-name-ticket');
                 const cName = document.getElementById('guest-name-confirm');
@@ -479,7 +486,7 @@
                     if(alertBox) {
                         alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Acceso Registrado. ✨`;
                         alertBox.style.display = 'block';
-                        confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
+                        safeConfetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
                         setTimeout(() => { alertBox.style.display = 'none'; }, 6000);
                     }
                 }
@@ -538,8 +545,8 @@
                 const end = Date.now() + 3000;
                 const colors = ['#bf953f', '#fcf6ba', '#b38728'];
                 (function frame() {
-                    confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
-                    confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
+                    safeConfetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
+                    safeConfetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
                     if (Date.now() < end) requestAnimationFrame(frame);
                 }());
             }, 800);
@@ -586,7 +593,7 @@
         // Globales para UI
         window.openBoleto = () => { const m = document.getElementById('modalBoleto'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; };
         window.closeBoleto = () => { const m = document.getElementById('modalBoleto'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
-        window.openRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
+        window.openRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'flex'; document.body.style.overflow = 'hidden'; safeConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] }); };
         window.closeRegalos = () => { const m = document.getElementById('modalRegalos'); if(m) m.style.display = 'none'; document.body.style.overflow = 'auto'; };
         window.openStory = (img, title, content) => {
             const im = document.getElementById('storyImg');
