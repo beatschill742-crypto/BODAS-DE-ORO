@@ -211,16 +211,6 @@
             color: var(--vino);
             line-height: 1;
         }
-
-        #admin-panel {
-            display: none;
-            background: white;
-            margin: 4rem auto;
-            max-width: 800px;
-            padding: 2rem;
-            border: 4px double var(--vino);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
     </style>
 </head>
 <body>
@@ -334,21 +324,6 @@
         </div>
     </section>
 
-    <section id="admin-panel" class="reveal px-6 text-center mx-auto">
-        <h3 class="font-serif-elegant text-2xl vino-name mb-8 uppercase font-bold text-center">Registro de Entradas (Admin)</h3>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-red-50 text-red-900 uppercase text-[10px] tracking-widest">
-                        <th class="p-4 border">Invitado</th>
-                        <th class="p-4 border">Fecha y Hora</th>
-                    </tr>
-                </thead>
-                <tbody id="checkin-list" class="text-sm"></tbody>
-            </table>
-        </div>
-    </section>
-
     <section id="regalos" class="py-24 px-6 bg-white text-center reveal border-y border-red-900/5">
         <div class="max-w-2xl mx-auto text-center">
             <h3 class="font-serif-elegant text-4xl vino-name font-bold uppercase mb-6 tracking-widest text-center">Mesa de Regalos</h3>
@@ -428,60 +403,61 @@
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Configuración segura
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fede-jovita-50';
-
+    <script>
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
         
-        // Instancia segura de confeti sobre un canvas fijo para evitar errores de redibujado en DOM
+        // Instancia segura de confeti sobre un canvas fijo para evitar errores
         const confettiCanvas = document.getElementById('confetti-canvas');
         const safeConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
 
-        async function initApp() {
-            try {
-                await signInAnonymously(auth);
-                const urlParams = new URLSearchParams(window.location.search);
-                const nombreParam = urlParams.get('nombre') || "Invitado Especial";
-                const modoRegistro = urlParams.get('checkin') === 'true';
-                const esAdmin = urlParams.get('admin') === 'true';
+        function initApp() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nombreParam = urlParams.get('nombre') || "Invitado Especial";
+            const modoRegistro = urlParams.get('checkin') === 'true';
 
-                let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
-                let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
+            // Limpieza y codificación de URL
+            let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
+            let nombreParaURL = nombreLimpio.trim().replace(/\s+/g, '-');
 
-                // Personalización UI
-                const hName = document.getElementById('guest-name-header');
-                const tName = document.getElementById('guest-name-ticket');
-                const cName = document.getElementById('guest-name-confirm');
-                const sText = document.getElementById('guest-text-story');
+            // Personalización UI segura
+            const hName = document.getElementById('guest-name-header');
+            const tName = document.getElementById('guest-name-ticket');
+            const cName = document.getElementById('guest-name-confirm');
+            const sText = document.getElementById('guest-text-story');
 
-                if(hName) hName.innerText = nombreLimpio;
-                if(tName) tName.innerText = nombreLimpio;
-                if(cName) cName.innerText = `¡${nombreLimpio}, te esperamos!`;
-                if(sText) sText.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
+            if(hName) hName.innerText = nombreLimpio;
+            if(tName) tName.innerText = nombreLimpio;
+            if(cName) cName.innerText = `¡${nombreLimpio}, te esperamos!`;
+            if(sText) sText.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-                // Generar QR
-                const baseUrl = window.location.origin + window.location.pathname;
-                const elQR = document.getElementById('qr-code-img');
-                if (elQR) {
-                    const checkinUrl = `${baseUrl}?nombre=${nombreParaURL}&checkin=true`;
-                    elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
-                }
+            // Generar QR de Check-in apuntando de regreso a esta misma página pero con checkin=true
+            const baseUrl = window.location.origin + window.location.pathname;
+            const elQR = document.getElementById('qr-code-img');
+            if (elQR) {
+                const checkinUrl = `${baseUrl}?nombre=${nombreParaURL}&checkin=true`;
+                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkinUrl)}`;
+            }
 
-                // Check-in
-                if (modoRegistro) {
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'), {
-                        invitado: nombreLimpio,
-                        fecha: serverTimestamp()
-                    });
+            // --- Enviar respuesta oculta a Google Forms ---
+            if (modoRegistro) {
+                // ID del formulario de Google Docs (extraído de tu enlace)
+                const formId = "1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q";
+                const urlForm = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+                
+                const formData = new URLSearchParams();
+                
+                // NOTA: Para que el nombre se guarde correctamente en el Google Form,
+                // necesitas reemplazar "entry.123456789" con el ID real de la pregunta de nombre en tu formulario.
+                formData.append("entry.123456789", nombreLimpio); 
+
+                fetch(urlForm, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: formData.toString()
+                }).then(() => {
                     const alertBox = document.getElementById('checkin-alert');
                     if(alertBox) {
                         alertBox.innerText = `✨ ¡Bienvenido/a ${nombreLimpio}! Acceso Registrado. ✨`;
@@ -489,30 +465,7 @@
                         safeConfetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728'] });
                         setTimeout(() => { alertBox.style.display = 'none'; }, 6000);
                     }
-                }
-
-                // Panel Admin
-                if (esAdmin) {
-                    const adminSection = document.getElementById('admin-panel');
-                    if(adminSection) {
-                        adminSection.style.display = 'block';
-                        const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'checkins'));
-                        const list = document.getElementById('checkin-list');
-                        if(list) {
-                            const data = [];
-                            querySnapshot.forEach(doc => data.push(doc.data()));
-                            data.sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
-                            list.innerHTML = data.map(item => `
-                                <tr>
-                                    <td class="p-4 border font-bold">${item.invitado}</td>
-                                    <td class="p-4 border text-gray-500">${item.fecha ? new Date(item.fecha.seconds * 1000).toLocaleString() : 'Reciente'}</td>
-                                </tr>
-                            `).join('');
-                        }
-                    }
-                }
-            } catch (e) {
-                console.error("Firebase Error:", e);
+                }).catch(err => console.error("Error registrando", err));
             }
         }
 
