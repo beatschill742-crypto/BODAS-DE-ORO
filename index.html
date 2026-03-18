@@ -15,7 +15,6 @@
     <meta name="twitter:image" content="Captura de pantalla 2026-03-15 172233.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Actualizado a la versión más reciente del confeti para mayor estabilidad -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     
@@ -88,8 +87,9 @@
             padding: 2.5rem;
             border: 2px solid var(--vino);
             max-width: 450px;
-            margin: 0 auto;
+            margin: 0 auto 2rem auto;
             box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            width: 100%;
         }
 
         .ticket::before, .ticket::after {
@@ -193,6 +193,10 @@
             color: var(--vino);
             line-height: 1;
         }
+
+        #tickets-container {
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -228,7 +232,7 @@
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#historia" class="primary-btn">Nuestra Historia</a>
-                <button onclick="openBoleto()" class="primary-btn bg-yellow-700">Ver mis Pases 🎫</button>
+                <button onclick="openBoleto()" class="primary-btn bg-yellow-700 btn-pases">Ver mis Pases 🎫</button>
             </div>
         </div>
     </header>
@@ -345,32 +349,24 @@
             <div class="flex flex-col gap-6 items-center mx-auto">
                 <p id="guest-name-confirm" class="text-gray-600 text-lg mb-4 italic text-center">¡Te esperamos!</p>
                 <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeGaOhm05elX5qrAWeL-yyz9gVGs5qKBbRIdsOguMYghtCH-Q/viewform', '_blank')" class="primary-btn w-full max-w-sm shadow-2xl">Confirmar Asistencia</button>
-                <button onclick="openBoleto()" class="primary-btn bg-yellow-700 w-full max-w-sm shadow-2xl text-center">Ver mis Pases 🎫</button>
+                <button onclick="openBoleto()" class="primary-btn bg-yellow-700 w-full max-w-sm shadow-2xl text-center btn-pases">Ver mis Pases 🎫</button>
             </div>
             <div class="mt-24 opacity-60 text-[12px] tracking-[1.5em] uppercase vino-name font-bold text-center">Vestimenta: Gala</div>
         </div>
     </section>
 
+    <!-- Modal Boletos Dinámicos -->
     <div id="modalBoleto" class="modal-overlay" onclick="closeBoleto()">
         <div class="modal-content p-8 sm:p-12 text-center" onclick="event.stopPropagation()">
             <div class="close-modal-btn" onclick="closeBoleto()">&times;</div>
-            <h3 class="font-serif-elegant text-3xl vino-name mb-10 uppercase text-center">Pase de Acceso</h3>
-            <div class="ticket shadow-2xl">
-                <div class="flex justify-between items-center mb-6">
-                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Bodas de Oro</span>
-                    <span class="font-serif-elegant text-[10px] uppercase text-gray-400 text-center">31.05.2026</span>
-                </div>
-                <h4 class="font-serif-elegant text-3xl mb-2 vino-name text-center">Fede & Jovita</h4>
-                <div class="ticket-divider"></div>
-                <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center">Pase exclusivo para:</p>
-                <p id="guest-name-ticket" class="font-serif-elegant text-2xl vino-name mb-4 text-center">Invitado especial</p>
-                <div class="ticket-divider"></div>
-                <div class="flex flex-col items-center gap-4 py-4 mx-auto">
-                    <img id="qr-code-img" src="" alt="QR" class="border-8 border-white shadow-xl w-40 h-40">
-                    <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Código de Seguridad Único</p>
-                </div>
+            <h3 class="font-serif-elegant text-3xl vino-name mb-8 uppercase text-center">Pase de Acceso</h3>
+            
+            <!-- Contenedor donde se insertarán los boletos generados -->
+            <div id="tickets-container" class="flex flex-col items-center">
+                <!-- Se inyectan con JS -->
             </div>
-            <button onclick="closeBoleto()" class="mt-12 text-[12px] uppercase text-gray-400 text-center mx-auto block">Regresar</button>
+
+            <button onclick="closeBoleto()" class="mt-8 text-[12px] uppercase text-gray-400 text-center mx-auto block font-bold">Regresar</button>
         </div>
     </div>
 
@@ -397,32 +393,64 @@
 
     <script>
         const eventDate = new Date(2026, 4, 31, 15, 0, 0).getTime();
-        
         let customConfetti;
 
         function initApp() {
             const urlParams = new URLSearchParams(window.location.search);
             const nombreParam = urlParams.get('nombre') || "Invitado Especial";
+            
+            // Nueva funcionalidad: Leer cantidad de boletos
+            let cantidadBoletos = parseInt(urlParams.get('boletos'));
+            if (isNaN(cantidadBoletos) || cantidadBoletos < 1) {
+                cantidadBoletos = 1; // Si no hay parámetro, es 1 boleto por defecto
+            }
 
             // Limpieza y codificación de URL
             let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
 
-            // Personalización UI
+            // Personalización Textos
             const hName = document.getElementById('guest-name-header');
-            const tName = document.getElementById('guest-name-ticket');
             const cName = document.getElementById('guest-name-confirm');
             const sText = document.getElementById('guest-text-story');
 
             if(hName) hName.innerText = nombreLimpio;
-            if(tName) tName.innerText = nombreLimpio;
             if(cName) cName.innerText = `¡${nombreLimpio}, te esperamos!`;
             if(sText) sText.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
-            // Generar QR
-            const elQR = document.getElementById('qr-code-img');
-            if (elQR) {
-                const qrData = encodeURIComponent(`Pase de Acceso para ${nombreLimpio} - Bodas de Oro Fede y Jovita`);
-                elQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${qrData}`;
+            // Actualizar botones para mostrar cuántos pases son
+            const btnPasesList = document.querySelectorAll('.btn-pases');
+            btnPasesList.forEach(btn => {
+                btn.innerText = `Ver mis Pases (${cantidadBoletos}) 🎫`;
+            });
+
+            // Generar Boletos Dinámicamente en el Modal
+            const ticketsContainer = document.getElementById('tickets-container');
+            if (ticketsContainer) {
+                let ticketsHTML = '';
+                
+                for (let i = 1; i <= cantidadBoletos; i++) {
+                    const qrData = encodeURIComponent(`Boleto ${i} de ${cantidadBoletos} - Pase de Acceso para ${nombreLimpio} - Bodas de Oro Fede y Jovita`);
+                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${qrData}`;
+
+                    ticketsHTML += `
+                        <div class="ticket shadow-2xl">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="font-serif-elegant text-[10px] uppercase text-gray-400">Bodas de Oro</span>
+                                <span class="font-serif-elegant text-[10px] uppercase text-gray-400 text-center">31.05.2026</span>
+                            </div>
+                            <h4 class="font-serif-elegant text-3xl mb-2 vino-name text-center">Fede & Jovita</h4>
+                            <div class="ticket-divider"></div>
+                            <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center">Pase ${i} de ${cantidadBoletos}</p>
+                            <p class="font-serif-elegant text-2xl vino-name mb-4 text-center">${nombreLimpio}</p>
+                            <div class="ticket-divider"></div>
+                            <div class="flex flex-col items-center gap-4 py-4 mx-auto">
+                                <img src="${qrUrl}" alt="QR" class="border-8 border-white shadow-xl w-40 h-40">
+                                <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Boleto Individual</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                ticketsContainer.innerHTML = ticketsHTML;
             }
 
             // Inicializar confeti seguro sin Web Workers (Evita el error 'blob')
