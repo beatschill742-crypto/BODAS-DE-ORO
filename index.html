@@ -290,7 +290,6 @@
             <p class="font-script vino-name text-7xl mb-4 text-center">El Inicio de Todo</p>
             <div class="w-32 h-1 bg-red-900 mx-auto mb-20 opacity-30"></div>
             
-            <!-- Usando atributos src estandar que el navegador entiende con espacios -->
             <div class="mb-24 cursor-pointer reveal" onclick="openStory('Captura de pantalla 2026-03-15 172233.png', 'Nuestra Boda', 'El comienzo de una vida compartida. Aquel día nuestros sueños se unieron en una promesa que ha florecido por 50 años.')">
                 <img src="Captura de pantalla 2026-03-15 172233.png" alt="Boda Principal" class="main-wedding-img">
                 <div class="mt-8 text-center">
@@ -422,15 +421,58 @@
 
         function initApp() {
             const urlParams = new URLSearchParams(window.location.search);
-            const nombreParam = urlParams.get('nombre') || "Invitado Especial";
             
+            // --- NUEVO: MODO DE VALIDACIÓN ---
+            // Si escanean el QR, la URL tendrá validar=true y mostrará esta pantalla
+            if (urlParams.get('validar') === 'true') {
+                const inv = decodeURIComponent(urlParams.get('invitado') || 'Invitado Especial');
+                const mes = decodeURIComponent(urlParams.get('mesa') || 'Mesa por asignar');
+                const bol = decodeURIComponent(urlParams.get('boleto') || '1 de 1');
+                
+                // Sobrescribir toda la página con el diseño de acceso confirmado
+                document.body.innerHTML = `
+                    <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #fdf2f2; font-family: 'Montserrat', sans-serif; padding: 20px; text-align: center;">
+                        <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99999;"></canvas>
+                        <div style="background: white; padding: 50px 30px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 4px solid #600000; width: 100%; max-width: 400px; position: relative;">
+                            <div style="font-size: 60px; margin-bottom: 20px; line-height: 1;">✅</div>
+                            <h2 style="font-family: 'Cinzel', serif; color: #600000; font-size: 28px; margin-bottom: 10px; font-weight: bold; text-transform: uppercase;">Acceso Permitido</h2>
+                            <p style="font-size: 10px; text-transform: uppercase; color: #999; letter-spacing: 2px;">Bodas de Oro Fede & Jovita</p>
+                            
+                            <div style="border-top: 2px dashed #600000; margin: 30px 0; opacity: 0.2;"></div>
+                            
+                            <p style="font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;">Invitado</p>
+                            <p style="font-family: 'Cinzel', serif; color: #1a1a1a; font-size: 28px; font-weight: bold; margin-bottom: 30px;">${inv}</p>
+                            
+                            <div style="background-color: #600000; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(96,0,0,0.2);">
+                                <p style="font-size: 26px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin: 0;">${mes}</p>
+                            </div>
+                            
+                            <p style="font-size: 16px; color: #666; margin-top: 20px;">Boleto <span style="font-weight: bold; color: #600000;">${bol}</span></p>
+                        </div>
+                    </div>
+                `;
+
+                // Lanzar confeti de éxito
+                if (typeof confetti === 'function') {
+                    const canvasVal = document.getElementById('confetti-canvas');
+                    const myConfetti = confetti.create(canvasVal, { resize: true, useWorker: false });
+                    myConfetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#bf953f', '#fcf6ba', '#b38728', '#600000'] });
+                }
+                return; // Detenemos la carga normal de la invitación
+            }
+            // ---------------------------------
+
+            // Parámetros normales de la URL
+            const nombreParam = urlParams.get('nombre') || "Invitado Especial";
             let cantidadBoletos = parseInt(urlParams.get('boletos'));
             if (isNaN(cantidadBoletos) || cantidadBoletos < 1) {
                 cantidadBoletos = 1;
             }
+            const mesaParam = urlParams.get('mesa') || '';
 
             let nombreLimpio = decodeURIComponent(nombreParam).replace(/-/g, ' ');
 
+            // Textos
             const hName = document.getElementById('guest-name-header');
             const cName = document.getElementById('guest-name-confirm');
             const sText = document.getElementById('guest-text-story');
@@ -439,17 +481,28 @@
             if(cName) cName.innerText = `¡${nombreLimpio}, te esperamos!`;
             if(sText) sText.innerText = `${nombreLimpio}, queremos compartir contigo los momentos que forjaron este camino de amor.`;
 
+            // Botones de Pases
             const btnPasesList = document.querySelectorAll('.btn-pases');
             btnPasesList.forEach(btn => {
                 btn.innerText = `Ver mis Pases (${cantidadBoletos}) 🎫`;
             });
 
+            // Generar Boletos y QR Inteligente (Link)
             const ticketsContainer = document.getElementById('tickets-container');
             if (ticketsContainer) {
                 let ticketsHTML = '';
+                let textoMesa = mesaParam ? `Mesa ${mesaParam}` : 'Mesa por asignar';
+                
+                // Extraemos la URL base (sin parámetros extras) para crear el link del QR
+                const baseUrl = window.location.href.split('?')[0];
+
                 for (let i = 1; i <= cantidadBoletos; i++) {
-                    const qrData = encodeURIComponent(`Boleto ${i} de ${cantidadBoletos} - Pase de Acceso para ${nombreLimpio} - Bodas de Oro Fede y Jovita`);
-                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${qrData}`;
+                    
+                    // AHORA EL QR ES UN ENLACE QUE ABRE LA PÁGINA DE VALIDACIÓN
+                    const enlaceValidacion = `${baseUrl}?validar=true&invitado=${encodeURIComponent(nombreLimpio)}&mesa=${encodeURIComponent(textoMesa)}&boleto=${i} de ${cantidadBoletos}`;
+                    const qrData = encodeURIComponent(enlaceValidacion);
+                    
+                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${qrData}`;
 
                     ticketsHTML += `
                         <div class="ticket shadow-2xl">
@@ -460,11 +513,12 @@
                             <h4 class="font-serif-elegant text-3xl mb-2 vino-name text-center">Fede & Jovita</h4>
                             <div class="ticket-divider"></div>
                             <p class="text-[10px] uppercase text-gray-400 tracking-widest mb-2 text-center">Pase ${i} de ${cantidadBoletos}</p>
-                            <p class="font-serif-elegant text-2xl vino-name mb-4 text-center">${nombreLimpio}</p>
+                            <p class="font-serif-elegant text-2xl vino-name mb-2 text-center">${nombreLimpio}</p>
+                            <p class="text-[12px] uppercase text-gray-500 font-bold tracking-widest mb-4 text-center">${textoMesa}</p>
                             <div class="ticket-divider"></div>
                             <div class="flex flex-col items-center gap-4 py-4 mx-auto">
                                 <img src="${qrUrl}" alt="QR" class="border-8 border-white shadow-xl w-40 h-40">
-                                <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Boleto Individual</p>
+                                <p class="text-[9px] uppercase tracking-[0.5em] text-gray-400 italic text-center">Muestra este código en la entrada</p>
                             </div>
                         </div>
                     `;
@@ -502,34 +556,39 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initApp();
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
+            
+            // Si no estamos en la página de validación, arrancar los contadores y animaciones normales
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('validar') !== 'true') {
+                setInterval(updateCountdown, 1000);
+                updateCountdown();
 
-            if (customConfetti) {
-                setTimeout(() => {
-                    const end = Date.now() + 3000;
-                    const colors = ['#bf953f', '#fcf6ba', '#b38728'];
-                    (function frame() {
-                        customConfetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
-                        customConfetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
-                        if (Date.now() < end) requestAnimationFrame(frame);
-                    }());
-                }, 800);
-            }
+                if (customConfetti) {
+                    setTimeout(() => {
+                        const end = Date.now() + 3000;
+                        const colors = ['#bf953f', '#fcf6ba', '#b38728'];
+                        (function frame() {
+                            customConfetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: colors });
+                            customConfetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: colors });
+                            if (Date.now() < end) requestAnimationFrame(frame);
+                        }());
+                    }, 800);
+                }
 
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting && entry.target instanceof HTMLElement) {
-                            entry.target.classList.add('active');
-                        }
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+                                entry.target.classList.add('active');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    document.querySelectorAll('.reveal').forEach(el => {
+                        if (el instanceof HTMLElement) observer.observe(el);
                     });
-                }, { threshold: 0.1 });
-                document.querySelectorAll('.reveal').forEach(el => {
-                    if (el instanceof HTMLElement) observer.observe(el);
-                });
-            } else {
-                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                } else {
+                    document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                }
             }
         });
 
@@ -548,7 +607,8 @@
             } 
         };
         document.addEventListener('click', () => { 
-            if (audio && audio.paused && !audioIniciado) { 
+            const urlParams = new URLSearchParams(window.location.search);
+            if (audio && audio.paused && !audioIniciado && urlParams.get('validar') !== 'true') { 
                 audio.currentTime = 21; 
                 audio.play().catch(()=>{}); 
                 audioIniciado = true; 
