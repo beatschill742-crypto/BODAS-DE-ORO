@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Fede & Jovita</title>
     
-    <!-- Etiquetas Meta para Miniatura en WhatsApp/Facebook -->
+    <!-- Etiquetas Meta para Miniatura en WhatsApp/Facebook (RUTAS ABSOLUTAS) -->
     <meta property="og:title" content="Bodas de Oro - Fede & Jovita">
     <meta property="og:description" content="Acompáñanos a celebrar nuestros 50 años de matrimonio el 31 de mayo de 2026.">
-    <!-- Ruta relativa para evitar 404 si tu dominio es diferente -->
-    <meta property="og:image" content="Captura de pantalla 2026-03-15 172233.png">
+    
+    <!-- Ruta absoluta obligatoria para WhatsApp, con espacios codificados (%20) -->
+    <meta property="og:image" itemprop="image" content="https://fede-y-jovita.github.io/Captura%20de%20pantalla%202026-03-15%20172233.png">
+    <meta property="og:image:secure_url" itemprop="image" content="https://fede-y-jovita.github.io/Captura%20de%20pantalla%202026-03-15%20172233.png">
+    <meta property="og:image:type" content="image/png">
+    <!-- A veces WhatsApp requiere las dimensiones explícitas -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <meta property="og:url" content="https://fede-y-jovita.github.io/">
     <meta property="og:type" content="website">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bodas de Oro - Fede & Jovita">
     <meta name="twitter:description" content="Acompáñanos a celebrar nuestros 50 años de matrimonio">
-    <meta name="twitter:image" content="Captura de pantalla 2026-03-15 172233.png">
+    <meta name="twitter:image" content="https://fede-y-jovita.github.io/Captura%20de%20pantalla%202026-03-15%20172233.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
@@ -239,6 +247,19 @@
         </div>
     </header>
 
+    <!-- Mensaje de las Hijas -->
+    <section class="py-32 bg-[#fffcf9] text-center px-6 reveal border-b border-red-900/5">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="text-6xl text-gray-300 font-serif opacity-50 block mb-6 leading-none">"</span>
+            <p class="text-gray-700 font-light leading-loose text-xl md:text-2xl italic mb-12 px-4 md:px-12">
+                Con inmenso amor y gratitud profunda, nosotras, el mayor fruto de su unión, tenemos el honor de invitarlos a celebrar el jubileo de nuestros padres. Durante medio siglo, nos han enseñado que el amor verdadero lo soporta todo, es paciente, comprensivo y eterno. Hoy, nos llena de ilusión rodearlos de las personas que más aprecian para celebrar juntos sus Bodas de Oro.
+            </p>
+            <p class="text-[10px] uppercase tracking-[0.5em] text-gray-400 font-bold mb-4">Con todo nuestro cariño, sus hijas:</p>
+            <p class="font-script vino-name text-4xl md:text-5xl">Vianey, Fernanda y Michelle Robles</p>
+            <div class="w-32 h-px bg-red-900 mx-auto mt-16 opacity-20"></div>
+        </div>
+    </section>
+
     <section class="py-20 bg-white text-center reveal border-y border-red-900/5">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <p class="font-serif-elegant text-[13px] tracking-[0.8em] mb-12 uppercase font-bold vino-name">Faltan solo...</p>
@@ -391,7 +412,7 @@
                 <p class="text-3xl text-gray-800 font-bold text-center tracking-widest mb-8">51972249</p>
                 <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51972249" target="_blank" rel="noopener noreferrer" class="primary-btn w-full block shadow-lg">Comprar en Línea</a>
             </div>
-            <button onclick="closeRegalos()" class="mt-8 text-[12px] uppercase text-gray-400 tracking-widest text-center mx-auto block font-bold">Cerrar Ventana</button>
+            <button onclick="closeRegalos()" class="mt-12 text-[12px] uppercase text-gray-400 tracking-widest text-center mx-auto block font-bold">Cerrar Ventana</button>
         </div>
     </div>
 
